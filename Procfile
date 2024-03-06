@@ -1,1 +1,1 @@
-web: gunicorn service-savvy.wsgi
+web: gunicorn project_savvy.wsgi
