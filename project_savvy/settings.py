@@ -26,7 +26,6 @@ SECRET_KEY = 'django-insecure-c*1vduavi6&uf4-3-u^q#z92(^zznn_41*ot1om$1+^1+z5a7t
 DEBUG = True
 
 ALLOWED_HOSTS = [
-    '8000-meganw22-servicesavvy-pe1g239x1xr.ws-eu108.gitpod.io/',
     '8000-meganw22-servicesavvy-pe1g239x1xr.ws-eu108.gitpod.io',
 ]
 
@@ -40,6 +39,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'home',
 ]
 
 MIDDLEWARE = [
