@@ -31,3 +31,9 @@ class create_ticket(models.Model):
     created_on = models.DateTimeField(auto_now_add=True)
     location = models.CharField(max_length=200)
     priority = models.IntegerField(choices=PRIORITY, default=0)
+
+    class Meta:
+        ordering = ["priority"]
+
+    def __str__(self):
+        return f"Request: {self.title}"

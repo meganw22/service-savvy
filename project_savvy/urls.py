@@ -21,7 +21,7 @@ from my_requests import views as my_requests_views
 from my_tasks import views as my_tasks_views
 
 urlpatterns = [
-    path('home/', savvy_views.index, name='index'),
+    path('', savvy_views.index, name='index'),
     path('requests/', my_requests_views.my_requests, name='requests'),
     path('tasks/', my_tasks_views.my_tasks, name='tasks'),
     path('admin/', admin.site.urls),
