@@ -1,6 +1,6 @@
 from django.shortcuts import render
-from django.http import HttpResponse
+from django.views import generic
+from .models import create_ticket
 
-# Create your views here.
-def my_requests(request):
-    return HttpResponse("Savvy Requests")
+class TicketList(generic.ListView):
+    model = create_ticket
