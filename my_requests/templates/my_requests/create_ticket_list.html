@@ -9,11 +9,11 @@
 </head>
 
 <body>
-    <h1>Ticket list</h1>
+    <h1>All Requests</h1>
     {% for create_ticket in object_list %}
     <h2>{{create_ticket.title}}</h2>
-    <p>{{create_ticket.job_category}}</p>
-    <p>Author: {{create_ticket.author}}</p>
+    <p>{{ create_ticket.job_category }}</p>
+    <p>User: {{create_ticket.username}}</p>
     {% endfor %}
 </body>
 

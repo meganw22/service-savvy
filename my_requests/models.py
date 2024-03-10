@@ -26,7 +26,7 @@ class create_ticket(models.Model):
     username = models.ForeignKey(
         User, on_delete=models.CASCADE, related_name="my_requests"
     )
-    job_category = models.IntegerField(choices=JOB_CATEGORY, default=0)
+    job_category = models.CharField(choices=JOB_CATEGORY, default=0)
     job_description = models.CharField(max_length=400, blank=False)
     created_on = models.DateTimeField(auto_now_add=True)
     location = models.CharField(max_length=200)

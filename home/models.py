@@ -1,17 +1,15 @@
 from django.db import models
-# from django.contrib.auth.models import User, AbstractUser
+# from django.contrib.auth.models import User
 
 # # Create your models here.
 
-# class CustomUser(AbstractUser):
-#     REQUESTOR = 'requestor'
-#     FIXER = 'fixer'
-#     USER_TYPES = [
-#         (REQUESTOR, 'Requestor'),
-#         (FIXER, 'Fixer'),
-#     ]
-#     user_type = models.CharField(choices=USER_TYPES, max_length=20)
+# class login(models.Model):
+#     FIXER = "Fixer"
+#     REQUESTOR = "Requestor"
+#     USER_TYPES = {
+#         FIXER: "Fixer",
+#         REQUESTOR: "Requestor",
+#     }
 
-# class create_account(models.Model):
-    
-#     user = models.ForeignKey(CustomUser, on_delete=models.CASCADE)
+#     username = models.CharField(max_length=50)
+#     user_type = models.CharField(choices=USER_TYPES, default=blank)
