@@ -16,12 +16,10 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path, include
-from home import views as savvy_views
-from my_tasks import views as my_tasks_views
 
 urlpatterns = [
-    path('', savvy_views.index, name='index'),
-    path('', include("my_requests.urls"), name="my-request-urls"),
-    path('tasks/', my_tasks_views.my_tasks, name='tasks'),
-    path('admin/', admin.site.urls),
+    path("", include("home.urls"), name='home-urls'),
+    path("", include("my_requests.urls"), name="my-request-urls"),
+    path("", include("my_tasks.urls"), name='my-task-urls'),
+    path("admin/", admin.site.urls),
 ]
