@@ -23,6 +23,7 @@ PRIORITY = (
 # Create your models here.
 class create_ticket(models.Model):
     title = models.CharField(max_length=200)
+    slug = models.SlugField(max_length=200, unique=True)
     username = models.ForeignKey(
         User, on_delete=models.CASCADE, related_name="my_requests"
     )
