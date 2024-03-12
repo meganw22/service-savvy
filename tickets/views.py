@@ -5,5 +5,5 @@ from .models import create_ticket
 # Create your views here.
 class TicketList(generic.ListView):
     queryset = create_ticket.objects.all()
-    template_name = "my_requests/index.html"
+    template_name = "tickets/index.html"
     # paginate_by = 6

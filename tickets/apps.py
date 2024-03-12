@@ -1,6 +1,6 @@
 from django.apps import AppConfig
 
 
-class MyTasksConfig(AppConfig):
+class MyRequestsConfig(AppConfig):
     default_auto_field = 'django.db.models.BigAutoField'
-    name = 'my_tasks'
+    name = 'tickets'
