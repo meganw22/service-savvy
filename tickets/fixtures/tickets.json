@@ -1,0 +1,15 @@
+[
+    {
+        "model": "tickets.Ticket",
+        "pk": null,
+        "fields": {
+            "title": "Lights out in corridor",
+            "username": "2",
+            "job_category": "2",
+            "job_description": "No lights in the corridor meaning that everyone is bumping into each other.",
+            "created_on": "2024-03-12T13:58:53.884Z",
+            "location": "S block, Blending Main corridor, Clean Side, Ground floor",
+            "priority": "1"
+        }
+    }
+]

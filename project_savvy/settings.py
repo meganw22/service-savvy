@@ -32,7 +32,7 @@ SECRET_KEY = os.environ.get("SECRET_KEY")
 DEBUG = True
 
 ALLOWED_HOSTS = [
-    '8000-meganw22-servicesavvy-pe1g239x1xr.ws-eu108.gitpod.io',
+    '8000-meganw22-servicesavvy-pe1g239x1xr.ws-eu109.gitpod.io',
     '.herokuapp.com'
 ]
 

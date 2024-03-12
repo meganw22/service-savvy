@@ -27,10 +27,12 @@ class Ticket(models.Model):
         User, on_delete=models.CASCADE, related_name="user_tickets"
     )
     job_category = models.IntegerField(choices=JOB_CATEGORY, default=0)
-    job_description = models.CharField(max_length=400, blank=False)
+    job_description = models.TextField(max_length=400, blank=False)
     created_on = models.DateTimeField(auto_now_add=True)
-    location = models.CharField(max_length=200)
+    location = models.TextField(max_length=200)
     priority = models.IntegerField(choices=PRIORITY, default=0)
+    is_complete = models.BooleanField(default=False)
+    updated_on = models.DateTimeField(auto_now=True)
 
     class Meta:
         ordering = ["priority"]
@@ -53,3 +55,7 @@ class Comment(models.Model):
         ordering = ["created_on"]
     def __str__(self):
         return f"Comment {self.body} by {self.username}"
+
+class Archive(models.Model):
+    ticket = models.ForeignKey(Ticket, on_delete=models.CASCADE)
+    archived_at = models.DateTimeField(auto_now_add=True)
