@@ -10,10 +10,10 @@
 
 <body>
     <h1>Tickets</h1>
-    {% for create_ticket in object_list %}
-    <h2>{{create_ticket.title}}</h2>
-    <p>{{ create_ticket.job_category }}</p>
-    <p>User: {{create_ticket.username}}</p>
+    {% for tickets in object_list %}
+    <h2>{{ tickets.title }}</h2>
+    <p>{{ tickets.job_category }}</p>
+    <p>User: {{ tickets.username }}</p>
     {% endfor %}
 </body>
 

@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import Ticket, Comment
+from .models import Ticket, Comment, Archive
 from django_summernote.admin import SummernoteModelAdmin
 
 class TicketAdmin(SummernoteModelAdmin):
@@ -11,3 +11,4 @@ class TicketAdmin(SummernoteModelAdmin):
 # Register your models here.
 admin.site.register(Ticket, TicketAdmin)
 admin.site.register(Comment)
+admin.site.register(Archive)

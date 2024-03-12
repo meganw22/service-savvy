@@ -15,21 +15,21 @@
         <!-- Blog Entries Column -->
         <div class="col-12 mt-3 left">
             <div class="row">
-                {% for create_ticket in create_ticket_list %}
+                {% for ticket in ticket_list %}
                 <div class="col-md-4">
                     <div class="card mb-4">
                         <div class="card-body">
                             <div class="image-container">
                                 <div class="image-flash">
-                                    <p class="author">Author: {{ create_ticket.user }}</p>
+                                    <p class="author">User: {{ ticket.username }}</p>
                                 </div>
                             </div>
-                            <a href="{% url 'post_detail' post.slug %}" class="post-link">
-                                <h2 class="card-title">{{ create_ticket.title }}</h2>
+                            <a href="#" class="post-link">
+                                <h2 class="card-title">{{ ticket.title }}</h2>
                             </a>
 
                             <hr />
-                            <p class="card-text text-muted h6">{{ create_ticket.created_on}}
+                            <p class="card-text text-muted h6">{{ ticket.created_on}}
                             </p>
                         </div>
                     </div>
