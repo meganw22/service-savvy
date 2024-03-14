@@ -26,23 +26,25 @@
 
 <body>
     <!-- Header -->
-    <header class="navbar navbar-expand-lg navbar-dark sticky-top">
+    <header class="navbar navbar-expand-lg sticky-top text" style="background-color: #86cdff;">
         <div class="container-fluid">
-            <a class="navbar-brand" href="#">Service Savvy</a>
+            <a class="navbar-brand text-light" href="#">Service Savvy</a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
                 aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
             <div class="collapse navbar-collapse" id="navbarNav">
-                <ul class="navbar-nav ms-auto">
+                <ul class="navbar-nav ms-auto text-light">
                     <li class="nav-item">
-                        <a class="nav-link active" aria-current="page" href="#">Home</a>
+                        <a class="nav-link {% if request.path == home_url %}active{% endif %}" aria-current="page"
+                            href="{% url 'home' %}">Home</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#">Tickets</a>
+                        <a class="nav-link {% if request.path == home_url %}active{% endif %}" 
+                        href="{% url 'tickets' %}">Tickets</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#">
+                        <a class="nav-link " href="#">
                             <i class="fas fa-user me-1"></i>
                             Megan Walford
                         </a>
@@ -55,25 +57,31 @@
     <!-- Navigation -->
     <div class="container-fluid">
         <div class="row flex-nowrap">
-            <div class="col-auto col-md-3 col-xl-2 px-sm-2 px-0 sidebar">
+            <!-- <div class="col-auto col-md-3 col-xl-2 px-sm-2 px-0 sidebar">
                 <div class="d-flex flex-column align-items-center align-items-sm-start px-3 pt-2 min-vh-100">
                     <a href="#" class="d-flex align-items-center pb-3 mb-md-0 me-md-auto text-white text-decoration-none">
-                        <span class="fs-5 d-none d-sm-inline">Menu</span>
+                        <span class="fs-5 d-none d-sm-inline"></span>
                     </a>
                     <ul class="nav nav-pills flex-column mb-sm-auto mb-0 align-items-center align-items-sm-start">
                         <li class="nav-item">
-                            <a href="#" class="nav-link active">Home</a>
+                            <a href="{% url 'home' %}" class="nav-link">Home</a>
                         </li>
                         <li class="nav-item">
-                            <a href="#" class="nav-link">Dashboard</a>
+                            <a href="#" class="nav-link">Tickets</a>
                         </li>
                         <li class="nav-item">
-                            <a href="#" class="nav-link">Feedback</a>
+                            <a href="#" class="nav-link">Archive</a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="#" class="nav-link">Tickets</a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="#" class="nav-link">My Profile</a>
                         </li>
                     </ul>
                     <hr>
                 </div>
-            </div>
+            </div> -->
             <div class="col py-3">
                 <main class="flex-shrink-0">
                     <div>
@@ -87,7 +95,7 @@
     </div>
 
     <!-- Footer -->
-    <footer class="footer mt-auto py-3">
+    <footer class="footer fixed-bottom mt-auto py-3">
         <div class="container text-center">
             <p class="m-0">Made by Code Instituters</p>
             <p class="m-0">Follow us:

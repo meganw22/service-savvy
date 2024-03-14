@@ -1,7 +1,7 @@
 /* Global Styles */
 body {
     background-color: #f8f9fa;
-    color: #212529;
+    color: #72808e;
 }
 
 .navbar {
@@ -30,4 +30,13 @@ body {
 
 .nav-pills .nav-link.active, .nav-pills .show>.nav-link {
     background-color: #adb5bd;
+}
+
+
+@media screen and (max-width: 80%) {
+    body {
+        max-width: 80%;
+        background-color: #f8f9fa;
+        color: #89d6e9;
+    }
 }
