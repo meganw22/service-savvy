@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=Fredoka:wght@700&family=Lato:ital,wght@0,300;0,400;1,300;1,400&family=League+Spartan:wght@100..900&family=Montserrat&family=Rouge+Script&display=swap');
+
 /* Global Styles */
 body {
     background-color: #f8f9fa;
@@ -7,6 +9,15 @@ body {
 .navbar {
     background-color: #7E6DF7;
     color: #ffffff;
+}
+
+.navbar-brand {
+    font-family: "League Spartan", sans-serif;
+    font-optical-sizing: auto;
+    font-weight: 900;
+    font-size: 50px;
+    letter-spacing: -3px;
+    padding: 0;
 }
 
 .sidebar {
@@ -28,13 +39,12 @@ body {
     color: #adb5bd;
 }
 
-.nav-pills .nav-link.active, .nav-pills .show>.nav-link {
+.nav-pills .nav-link.active,
+.nav-pills .show>.nav-link {
     background-color: #adb5bd;
 }
 
-.navbar-toggler {
-
-}
+.navbar-toggler {}
 
 
 @media screen and (max-width: 80%) {
