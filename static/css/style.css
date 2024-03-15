@@ -5,17 +5,17 @@ body {
 }
 
 .navbar {
-    background-color: #343a40;
+    background-color: #7E6DF7;
     color: #ffffff;
 }
 
 .sidebar {
-    background-color: #343a40;
+    background-color: #7E6DF7;
     color: #ffffff;
 }
 
 .footer {
-    background-color: #343a40;
+    background-color: #6054bc;
     color: #ffffff;
 }
 
@@ -32,11 +32,14 @@ body {
     background-color: #adb5bd;
 }
 
+.navbar-toggler {
+
+}
+
 
 @media screen and (max-width: 80%) {
     body {
-        max-width: 80%;
         background-color: #f8f9fa;
-        color: #89d6e9;
+        color: #7E6DF7;
     }
 }
