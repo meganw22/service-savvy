@@ -40,7 +40,6 @@ class Ticket(models.Model):
     def __str__(self):
         return f"Request: {self.title}"
 
-
 class Comment(models.Model):
     ticket = models.ForeignKey(
         Ticket, on_delete=models.CASCADE, related_name="comments"

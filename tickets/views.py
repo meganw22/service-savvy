@@ -7,3 +7,8 @@ class TicketList(generic.ListView):
     queryset = Ticket.objects.all()
     template_name = "tickets/index.html"
     # paginate_by = 6
+
+# class TicketDetailView(generic.DetailView):
+#     queryset = Ticket.objects.all()
+#     template_name = 'ticket_detail.html'
+#     context_object_name = 'ticket'
