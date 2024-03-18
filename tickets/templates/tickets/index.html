@@ -1,5 +1,4 @@
 {% extends "base.html" %}
-{% load static %}
 
 {% block title %}Tickets{% endblock %}
 
@@ -12,20 +11,23 @@
 <!-- index.html content starts here -->
 <div class="container p-2">
     <div class="row">
+        <h1 class="py-2">Tickets</h1>
         <div class="col-sm-12 col-md-4">
-            <div class="card">
-                <div></div>
+            {% for tickets in object_list %}
+            <div class="card mb-2">
                 <div class="card-body">
-                    <h5 class="card-title" a href="#">{{ ticket.title }}</h5>
-                    <p class="card-text">{{ ticket.job_description }}</p>
+                    <h3 class="card-title" a href="ticket_detail.html">{{ tickets.title }}</h3>
+                    <p class="text-end">User: {{ tickets.username }}</p>
                 </div>
             </div>
+            {% endfor %}
         </div>
         <div class="col-sm-12 col-md-8" style="background-color: aquamarine;">
             
         </div>
     </div>
 </div>
+
 
 
 <!-- index.html content ends here -->
