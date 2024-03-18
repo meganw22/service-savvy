@@ -12,20 +12,17 @@
 <!-- Main Content -->
 <div class="container-fluid">
     <div class="row">
-        <!-- Image column -->
-        <div class="col-md-6 img-styles d-flex align-items-start">
-            <img src="/static/images/mountains.png" alt="mountains header" class="header-img">
-        </div>
-        <div class="col-md-6">
-            <div class="px-4 py-5 my-5 text-center">
-                <img class="d-block mx-auto mb-4" src="/docs/5.3/assets/brand/bootstrap-logo.svg" alt="" width="72" height="57">
-                <h1 class="display-5 fw-bold text-body-emphasis">Centered hero</h1>
-                <div class="col-lg-6 mx-auto">
-                    <p class="lead mb-4">Quickly design and customize responsive mobile-first sites with Bootstrap, the world’s most
-                        popular front-end open source toolkit, featuring Sass variables and mixins, responsive grid system,
-                        extensive prebuilt components, and powerful JavaScript plugins.</p>
-                    <div class="d-grid gap-2 d-sm-flex justify-content-sm-center">
-                        <button type="button" class="btn btn-primary btn-lg px-4 gap-3">Primary button</button>
+        <!-- Card column -->
+        <div class="col-md-12 p-3">
+            <div class="card">
+                <img src="/static/images/francesco-ungaro-2835436.jpg" alt="mountains header"
+                    class="card-img-top img-fluid" style="height: 25vh; object-fit: cover;">
+                <div class="card-body">
+                    <h1 class="card-title text-center mb-4">Welcome to the Service Savvy Portal</h1>
+                    <p class="card-text lead">Text text text</p>
+                    <div class="text-center">
+                        <button type="button" class="btn btn-primary btn-lg px-4 gap-3"
+                            style="background-color: #00856f">Create Request</button>
                         <button type="button" class="btn btn-outline-secondary btn-lg px-4">Secondary</button>
                     </div>
                 </div>
@@ -33,8 +30,6 @@
         </div>
     </div>
 </div>
-
-
 
 <!-- index.html content ends here -->
 {% endblock %}
