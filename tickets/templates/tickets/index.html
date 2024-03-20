@@ -16,7 +16,7 @@
             {% for tickets in object_list %}
             <div class="card mb-2">
                 <div class="card-body">
-                    <a href="#" class="ticket-link">
+                    <a href="{{ ticket.get_absolute_url }}">
                         <h4 class="card-title">{{ tickets.title }}</h4>
                     </a>
                         <p class="text-end mb-0">User: {{ tickets.username }}</p>

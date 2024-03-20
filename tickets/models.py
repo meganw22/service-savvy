@@ -1,4 +1,5 @@
 from django.db import models
+from django.urls import reverse
 from django.contrib.auth.models import User
 
 JOB_CATEGORY = (
@@ -23,6 +24,7 @@ PRIORITY = (
 # Create your models here.
 class Ticket(models.Model):
     title = models.CharField(max_length=200)
+    slug = models.SlugField(null=True)
     username = models.ForeignKey(
         User, on_delete=models.CASCADE, related_name="user_tickets"
     )
@@ -39,6 +41,9 @@ class Ticket(models.Model):
 
     def __str__(self):
         return f"Request: {self.title}"
+
+    def get_absolute_url(self):
+        return reverse("ticket_detail", kwargs={"slug": self.slug})
 
 class Comment(models.Model):
     ticket = models.ForeignKey(

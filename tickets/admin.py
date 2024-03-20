@@ -12,3 +12,4 @@ class TicketAdmin(SummernoteModelAdmin):
 # Register your models here.
 admin.site.register(Comment)
 admin.site.register(Archive)
+# admin.site.register(TicketAdmin)
