@@ -3,7 +3,7 @@
 /* Global Styles */
 body {
     background-color: #ECEEEC;
-    color: #72808e;
+    color: #4c555e;
 }
 
 /* Nav bar Styles */
@@ -86,9 +86,18 @@ body {
     height: 33vh;
 } */
 
-@media screen and (max-width: 80%) {
-    body {
-        background-color: #f8f9fa;
-        color: #7E6DF7;
+.bold-font {
+    font-weight: bold !important;
+}
+
+@media screen and (min-width: 768px) {
+    .md-intro {
+        padding: 1em 5em;
+    }
+}
+
+@media screen and (min-width: 1440px) {
+    .xl-intro {
+        padding: 10px 200px;
     }
 }

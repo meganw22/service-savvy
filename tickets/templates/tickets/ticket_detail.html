@@ -1,4 +1,19 @@
-<div>
-    <h2>{{ object.title | safe }}</h2>
-    <p>{{ object.job_description }}</p>
+{% extends 'base.html' %} {% block content %}
+{% load static %}
+
+<div class="masthead">
+    <div class="container">
+        <div class="row g-0">
+            <div class="col-md-6 masthead-text">
+                <h1 class="ticket-title">{{ ticket.title }}</h1>
+                <p class="title-description">{{ ticket.job_description }}</p>
+                <p class="ticket-subtitle">{{ ticket.username }} | {{ ticket.created_on }}</p>
+            </div>
+            <!-- <div class="d-none d-md-block col-md-6 masthead-image">
+                <img src="{% static 'images/default.png' %}" class="scale" alt="placeholder">
+            </div> -->
+        </div>
+    </div>
 </div>
+
+{% endblock content %}
