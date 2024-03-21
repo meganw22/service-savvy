@@ -47,9 +47,9 @@ class Ticket(models.Model):
         return reverse("ticket_detail", kwargs={"slug": self.slug})
 
     def save(self, *args, **kwargs):
-        if not self.slug:
-            self.slug = slugify(self.title)
-        return super().save(*args, **kwargs)
+        self.slug = slugify(self.title)
+        super(Ticket, self).save(*args, **kwargs)
+
 
 class Comment(models.Model):
     ticket = models.ForeignKey(

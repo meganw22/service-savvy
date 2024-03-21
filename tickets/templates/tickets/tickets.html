@@ -10,8 +10,8 @@
         <div class="col-sm-12 col-md-4">
             {% for ticket in object_list %}
             <div class="card mb-2">
-                <div class="card-body">
-                    <a href="{{ tickets.get_absolute_url }}">
+                <div class="card-body"> {{ticket.slug }}
+                    <a href="{% url 'ticket_detail' ticket.slug %}" >
                         <h4 class="card-title">{{ ticket.title }}</h4>
                     </a>
                         <p class="text-end mb-0">User: {{ ticket.username }}</p>
