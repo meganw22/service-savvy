@@ -1,5 +1,6 @@
 from django.db import models
 from django.urls import reverse
+from django.template.defaultfilters import slugify
 from django.contrib.auth.models import User
 
 JOB_CATEGORY = (
@@ -44,6 +45,11 @@ class Ticket(models.Model):
 
     def get_absolute_url(self):
         return reverse("ticket_detail", kwargs={"slug": self.slug})
+
+    def save(self, *args, **kwargs):
+        if not self.slug:
+            self.slug = slugify(self.title)
+        return super().save(*args, **kwargs)
 
 class Comment(models.Model):
     ticket = models.ForeignKey(

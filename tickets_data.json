@@ -1,0 +1,50 @@
+[
+{
+  "model": "tickets.ticket",
+  "pk": 1,
+  "fields": {
+    "title": "Lights out in corridor",
+    "slug": "",
+    "username": 2,
+    "job_category": 2,
+    "job_description": "No lights in the corridor meaning that everyone is bumping into each other.",
+    "created_on": "2024-03-12T13:58:53.884Z",
+    "location": "S block, Blending Main corridor, Clean Side, Ground floor",
+    "priority": 1,
+    "is_complete": false,
+    "updated_on": "2024-03-12T20:38:39.355Z"
+  }
+},
+{
+  "model": "tickets.ticket",
+  "pk": 2,
+  "fields": {
+    "title": "No coffee",
+    "slug": "",
+    "username": 2,
+    "job_category": 5,
+    "job_description": "Theres is no more coffee in the vending machine!! All i get is water and sugar and im getting withdrawals!!",
+    "created_on": "2024-03-12T19:58:28.441Z",
+    "location": "Warehouse main offices, 2nd floor",
+    "priority": 1,
+    "is_complete": false,
+    "updated_on": "2024-03-12T20:38:39.355Z"
+  }
+},
+{
+  "model": "tickets.ticket",
+  "pk": 4,
+  "fields": {
+    "title": "Out of date PAT test",
+    "slug": "",
+    "username": 4,
+    "job_category": 8,
+    "job_description": "My laptop charger has run out of date, it needs re-testing",
+    "created_on": "2024-03-18T18:34:20.593Z",
+    "location": "T building, ground floor Labs, main office",
+    "priority": 3,
+    "is_complete": false,
+    "updated_on": "2024-03-18T18:34:20.593Z"
+  }
+}
+]
