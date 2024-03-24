@@ -4,22 +4,20 @@ from django.template.defaultfilters import slugify
 from django.contrib.auth.models import User
 
 JOB_CATEGORY = (
-    (0, "Choose Type"),
-    (1, "Plumbing"),
-    (2, "Lighting"),
-    (3, "Heating"),
-    (4, "Cleaning"),
-    (5, "Vending Services"),
-    (6, "Air Conditioning"),
-    (7, "Waste"),
-    (8, "Other"),
+    (0, "Plumbing"),
+    (1, "Lighting"),
+    (2, "Heating"),
+    (3, "Cleaning"),
+    (4, "Vending Services"),
+    (5, "Air Conditioning"),
+    (6, "Waste"),
+    (7, "Other"),
 )
 
 PRIORITY = (
-    (0, "Priority Level"),
-    (1, "High (<2 hours)"),
-    (2, "Medium (<1 day)"),
-    (3, "Low (1 day +)"),
+    (0, "High (<2 hours)"),
+    (1, "Medium (<1 day)"),
+    (2, "Low (1 day +)"),
 )
 
 # Create your models here.

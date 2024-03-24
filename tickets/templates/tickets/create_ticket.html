@@ -1,0 +1,51 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block content %}
+<!--Create a ticket-->
+<div class="container">
+    <div class="row mt-5">
+        <div class="col-md-6">
+            <h2 class="mb-2">Create a New Ticket</h2>
+            <p>Please provide as much detail as possible to help our team!</p>
+            <form method="post" enctype="multipart/form-data">
+                {% csrf_token %}
+                <div class="mb-2">
+                    <label for="title" class="form-label">Title</label>
+                    <input type="text" class="form-control" id="title" name="title" required>
+                </div>
+                <div class="mb-2">
+                    <label for="job_category" class="form-label">Job Category</label>
+                    <select class="form-select" id="job_category" name="job_category" required>
+                        <option value="">Select Job Category</option>
+                        {% for category in JOB_CATEGORY %}
+                            <option value="{{ category.0 }}">{{ category.1 }}</option>
+                        {% endfor %}
+                    </select>
+                </div>
+                <div class="mb-2">
+                    <label for="job_description" class="form-label">Job Description</label>
+                    <textarea class="form-control" id="job_description" name="job_description" rows="4"
+                        required></textarea>
+                </div>
+                <div class="mb-2">
+                    <label for="location" class="form-label">Location</label>
+                    <input type="text" class="form-control" id="location" name="location" required>
+                </div>
+                <div class="mb-2">
+                    <label for="priority" class="form-label">Priority</label>
+                    <select class="form-select" id="priority" name="priority" required>
+                        <option value="">Select Priority</option>
+                        {% for priority in PRIORITY %}
+                            <option value="{{ priority.0 }}">{{ priority.1 }}</option>
+                        {% endfor %}
+                    </select>
+                </div>
+                <button type="submit" class="btn btn-primary my-3" style="background-color:#00856f">Create Ticket</button>
+            </form>
+        </div>
+    </div>
+</div>
+
+
+{% endblock content %}
