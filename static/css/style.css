@@ -4,6 +4,7 @@
 body {
     background-color: #ECEEEC;
     color: #4c555e;
+    padding-bottom: 60px;
 }
 
 /* Nav bar Styles */
@@ -96,8 +97,9 @@ body {
     }
 }
 
-@media screen and (min-width: 1440px) {
-    .xl-intro {
-        padding: 10px 200px;
+@media (min-width: 1024px) {
+    .col-md-12.p-3 {
+        max-width: 75%;
+        margin: auto;
     }
 }
