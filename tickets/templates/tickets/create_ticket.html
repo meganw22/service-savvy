@@ -42,10 +42,12 @@
                     </select>
                 </div>
                 <button type="submit" class="btn btn-primary my-3" style="background-color:#00856f">Create Ticket</button>
+                <div class="col-md-6 text-end mb-4">
+                    <a href="{% url 'tickets' %}" class="btn btn-secondary">Cancel</a>
+                </div>
             </form>
         </div>
     </div>
 </div>
-
 
 {% endblock content %}
