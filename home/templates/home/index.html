@@ -17,12 +17,15 @@
                         Welcome to Service Savvy, your go-to maintenance solution. Trust
                         our dedicated team to swiftly handle your maintenance needs, so you can focus on your business.
                     </p>
+                    <hr>
+                    <p class="card-text md-intro fw-medium">
+                        Sign up now to get started or if you are a returning member, view your tickets here!
+                    </p>
                     <div class="text-center">
-                        <a href="{% url 'tickets' %}" class="btn btn-primary px-4 gap-3"
+                        <a href="{% url 'account_login' %}" class="btn btn-primary px-4 mx-3 gap-3"
+                            style="background-color: #00856f">Sign In</a>
+                        <a href="{% url 'tickets' %}" class="btn btn-primary px-4 mx-3"
                             style="background-color: #00856f">View Tickets</a>
-                        <a href="{% url 'account_login' %}" class="btn btn-primary px-4 gap-3"
-                        style="background-color: #00856f">Sign In</a>
-                        
                     </div>
                 </div>
             </div>

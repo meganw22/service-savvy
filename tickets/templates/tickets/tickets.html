@@ -6,43 +6,77 @@
 <div class="container p-2">
     <div class="row">
         <!--List of open tickets-->
-        <h1 class="py-2">Tickets</h1>
-        <p>Click here for closed Tickets</p>
-        <div class="d-flex justify-content-end mb-2">
-            <a href="{% url 'create_ticket' %}" class="btn btn-primary" style="background-color: #00856f">Create New Ticket</a>
+        <div class="col-sm-12 col-md-8">
+            <h1 class="py-2">Tickets</h1>
+            <p>Click here for closed Tickets</p>
         </div>
-        <div class="col-sm-12 col-md-4">
-            {% for ticket in object_list %}
-            <div class="card mb-2">
-                <div class="card-body">
-                    <a href="{% url 'ticket_detail' ticket.slug %}">
-                        <h4 class="card-title">{{ ticket.title }}</h4>
-                    </a>
-                    <p class="text-end mb-0">User: {{ ticket.username }}</p>
-                </div>
+        <div class="col-sm-12 col-md-4 text-end">
+            {% if user.is_authenticated %}
+            <div class="d-flex justify-content-end mb-2">
+                <a href="{% url 'create_ticket' %}" class="btn btn-primary" style="background-color: #00856f">Create New
+                    Ticket</a>
             </div>
-            {% endfor %}
-            {% if is_paginated %}
-    <nav aria-label="Page navigation">
-        <ul class="pagination justify-content-center">
-            {% if page_obj.has_previous %}
-            <li><a href="?page={{ page_obj.previous_page_number }}" class="page-link">&laquo; PREV </a></li>
+            {% else %}
+            <div class="d-flex justify-content-end mb-2">
+                <a href="{% url 'account_login' %}" class="btn btn-primary" style="background-color: #00856f">Log in to
+                    create a ticket</a>
+            </div>
             {% endif %}
-            {% if page_obj.has_next %}
-            <li><a href="?page={{ page_obj.next_page_number }}" class="page-link"> NEXT &raquo;</a></li>
-            {% endif %}
-        </ul>
-    </nav>
-    {% endif %}
         </div>
 
-        <!-- Ticket details section-->
-        <div class="col-sm-12 col-md-8">
-            <div>
-                <h3>Ticket Details</h3>
+        <div class="row">
+            <div class="col-sm-12 col-md-8 mx-auto">
+                <!-- Filter section -->
+                <form id="filterForm" action="" method="GET">
+                    <div class="mb-3 d-flex justify-content-between align-items-end">
+                        <div>
+                            <label for="sortBy" class="form-label">Sort By:</label>
+                            <select class="form-select" id="sortBy" name="sort_by">
+                                <option value="priority" {% if selected_sort_by == 'priority' %}selected{% endif %}>Priority</option>
+                                <option value="username" {% if selected_sort_by == 'username' %}selected{% endif %}>Username</option>
+                                <option value="created_on" {% if selected_sort_by == 'created_on' %}selected{% endif %}>Date Created</option>
+                            </select>
+                        </div>
+                        <button type="submit" class="btn btn-primary" style="background-color: #00323c">Apply</button>
+                    </div>
+                </form>
+
+                <!--List of tickets-->
+                {% for ticket in object_list %}
+                <div class="card mb-2">
+                    <div class="card-body">
+                        <a href="{% url 'ticket_detail' ticket.slug %}">
+                            <h4 class="card-title">{{ ticket.title }}</h4>
+                        </a>
+                        <p class="text-end mb-0">User: {{ ticket.username }}</p>
+                        <p class="text-end mb-0">Priority: {{ ticket.priority }}</p>
+                    </div>
+                </div>
+                {% endfor %}
+
+                <!--Pagination-->
+                {% if is_paginated %}
+                <nav aria-label="Page navigation">
+                    <ul class="pagination justify-content-center">
+                        {% if page_obj.has_previous %}
+                        <li><a href="?page={{ page_obj.previous_page_number }}" class="page-link">&laquo; PREV </a></li>
+                        {% endif %}
+                        {% if page_obj.has_next %}
+                        <li><a href="?page={{ page_obj.next_page_number }}" class="page-link"> NEXT &raquo;</a></li>
+                        {% endif %}
+                    </ul>
+                </nav>
+                {% endif %}
             </div>
         </div>
     </div>
-</div>
 
-{% endblock content %}
+    {% endblock content %}
+
+    <script>
+        // Submit the form when the priority is changed
+        document.getElementById('sortBy').addEventListener('change', function() {
+            document.getElementById('filterForm').submit();
+        });
+
+    </script>

@@ -2,15 +2,6 @@
 {% block content %}
 {% load static %}
 
-<!--Successful alert message-->
-{% if messages %}
-    {% for message in messages %}
-        {% if message.tags == 'success' %}
-            <div class="alert-message" style="display: none;">{{ message }}</div>
-        {% endif %}
-    {% endfor %}
-{% endif %}
-
 <!--About Information-->
 <div class="container mt-5">
     <div class="row">
@@ -34,12 +25,3 @@
     </div>
 </div>
 {% endblock content %}
-
-<!--Alert Script-->
-<script>
-    // Check if the alert message exists in the page
-    if (document.querySelector('.alert-message')) {
-        // Display the alert message
-        alert(document.querySelector('.alert-message').textContent);
-    }
-</script>
