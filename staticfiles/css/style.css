@@ -1,0 +1,115 @@
+@import url('https://fonts.googleapis.com/css2?family=Fredoka:wght@700&family=Lato:ital,wght@0,300;0,400;1,300;1,400&family=League+Spartan:wght@100..900&family=Montserrat&family=Rouge+Script&display=swap');
+
+/* Global Styles */
+body {
+    background-color: #ECEEEC;
+    color: #4c555e;
+    padding-bottom: 60px;
+}
+
+/* Nav bar Styles */
+.navbar {
+    background-color: #00856f;
+    color: #ffffff;
+}
+
+.navbar-brand {
+    font-family: "League Spartan", sans-serif;
+    font-optical-sizing: auto;
+    font-weight: 900;
+    font-size: 35px;
+    letter-spacing: -2px;
+    padding: 0;
+}
+
+.dropdown-menu {
+    color: #ffffff !important;
+    background-color: #00323c;
+    border: none;
+}
+
+.dropdown-menu > li {
+    color: #ffffff !important;
+}
+
+.dropdown-item{
+    color: #fff;
+}
+
+.dropdown-item.active, .dropdown-item:active {
+    color: #adb5bd;
+    text-decoration: solid;
+    background-color: #00323c;
+    }
+
+.navbar-nav .dropdown-menu {
+    position: absolute;
+}
+
+.nav-link {
+    color: #ffffff;
+}
+
+.nav-link:hover {
+    color: #adb5bd;
+}
+
+.nav-link:after {
+    color: #fff;
+}
+
+.nav-pills .nav-link.active,
+.nav-pills .show>.nav-link {
+    background-color: #adb5bd;
+}
+
+/* Footer */
+
+.footer {
+    background-color: #00323c;
+    color: #ffffff;
+}
+
+/* index.html styles */
+
+.header-img {
+    width: 100%;
+}
+
+.img-styles {
+    padding:0;
+    max-width: 100%;
+    width: 100%;
+    max-height: 2vh;
+}
+
+.bold-font {
+    font-weight: bold !important;
+}
+
+/* Ticket Styles */
+.priority-0{
+    color: red;
+}
+
+.priority-1{
+    color: orange;
+}
+
+.priority-2{
+    color: green;
+}
+
+
+@media screen and (min-width: 768px) {
+    .md-intro {
+        padding: 1em 5em;
+    }
+}
+
+@media (min-width: 1024px) {
+    .col-md-12.p-3 {
+        max-width: 75%;
+        margin: auto;
+    }
+}
