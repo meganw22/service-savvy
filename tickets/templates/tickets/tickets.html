@@ -33,8 +33,6 @@
                             <select class="form-select" id="sortBy" name="sort_by">
                                 <option value="priority" {% if selected_sort_by == "priority" %}selected{% endif %}>
                                     Priority</option>
-                                <option value="username" {% if selected_sort_by == "username" %}selected{% endif %}>
-                                    Username</option>
                                 <option value="created_on" {% if selected_sort_by == "created_on" %}selected{% endif %}>
                                     Date Created</option>
 
@@ -52,8 +50,10 @@
                         <a href="{% url 'ticket_detail' ticket.slug %}">
                             <h4 class="card-title">{{ ticket.title }}</h4>
                         </a>
-                        <p class="text-end mb-0">User: {{ ticket.username }}</p>
-                        <p class="text-end mb-0">Priority: {{ ticket.get_priority_display }}</p>
+                        <p class="text-end mb-0 priority-{{ ticket.priority }}">
+                            Priority: {{ ticket.get_priority_display }}
+                        </p>
+                        <p class="text-end mb-0">Created: {{ ticket.created_on }}</p>
                     </div>
                 </div>
                 {% endfor %}

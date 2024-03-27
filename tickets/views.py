@@ -18,8 +18,6 @@ class TicketListView(ListView):
         
         if sort_by == 'priority':
             queryset = queryset.order_by('priority')
-        elif sort_by == 'username':
-            queryset = queryset.order_by('username')
         elif sort_by == 'created_on':
             queryset = queryset.order_by('created_on')
         

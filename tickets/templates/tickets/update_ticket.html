@@ -19,7 +19,9 @@
                     <select class="form-select" id="job_category" name="job_category" required>
                         <option value="">Select Job Category</option>
                         {% for category_value, category_label in JOB_CATEGORY %}
-                        <option value="{{ category_value }}">{{ category_label }}</option>
+                            <option value="{{ category_value }}" {% if category_value == ticket.job_category %}selected{% endif %}>
+                                {{ category_label }}
+                            </option>
                         {% endfor %}
                     </select>
                 </div>
@@ -38,7 +40,9 @@
                     <select class="form-select" id="priority" name="priority" required>
                         <option value="">Select Priority</option>
                         {% for priority_value, priority_label in PRIORITY %}
-                        <option value="{{ priority_value }}">{{ priority_label }}</option>
+                            <option value="{{ priority_value }}" {% if priority_value == ticket.priority %}selected{% endif %}>
+                                {{ priority_label }}
+                            </option>
                         {% endfor %}
                     </select>
                 </div>

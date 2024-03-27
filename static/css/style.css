@@ -83,13 +83,23 @@ body {
     max-height: 2vh;
 }
 
-/* .card-img-top {
-    height: 33vh;
-} */
-
 .bold-font {
     font-weight: bold !important;
 }
+
+/* Ticket Styles */
+.priority-0{
+    color: red;
+}
+
+.priority-1{
+    color: orange;
+}
+
+.priority-2{
+    color: green;
+}
+
 
 @media screen and (min-width: 768px) {
     .md-intro {
