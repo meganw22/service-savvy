@@ -1,4 +1,4 @@
-{% extends 'base.html' %} 
+{% extends 'base.html' %}
 {% load static %}
 
 {% block content %}
@@ -27,9 +27,14 @@
                 <div class="col-md-4 fw-bold">Created On:</div>
                 <div class="col-md-8">{{ ticket.created_on }}</div>
             </div>
-            <div class="mt-5">
-                <a href="{% url 'update_ticket' ticket.slug %}" class="btn btn-primary me-2">Update</a>
-                <a href="{% url 'tickets' %}" class="btn btn-secondary">Return to Tickets</a>
+            <div class="mt-5 d-flex justify-content-between flex-wrap">
+                <a href="{% url 'tickets' %}" class="btn btn-secondary m-3">Return to Tickets</a>
+                <div class="m-3 d-flex flex-wrap">
+                    <a href="{% url 'update_ticket' ticket.slug %}"
+                        class="btn btn-primary me-2 mb-2 mb-md-0">Update Ticket</a>
+                    <a href="#" class="btn btn-danger me-2 mb-2 mb-md-0">Delete Ticket</a>
+                </div>
+
             </div>
         </div>
         <!-- <div class="col-md-4">
@@ -41,7 +46,4 @@
 <p>Ticket updates to be displayed here</p>
 {% endblock content %}
 
-
-<p>Commentsection to be put here</p>
-<p>Ticket updates to be displayed here</p>
 <!-- {% url 'update_ticket' ticket.id %} -->

@@ -4,8 +4,9 @@ from django.views.generic import ListView, DetailView, CreateView, UpdateView
 from django.template.loader import render_to_string
 from .models import Ticket, JOB_CATEGORY, PRIORITY
 from django.urls import reverse_lazy
+from .forms import TicketUpdateForm
 
-# Create your views here.
+# Ticket List View
 class TicketListView(ListView):
     queryset = Ticket.objects.all()
     template_name = "tickets/tickets.html"
@@ -29,10 +30,12 @@ class TicketListView(ListView):
         context['selected_sort_by'] = self.request.GET.get('sort_by', 'priority')  # Default to 'priority' if not provided
         return context
 
+# Ticket Detail View
 class TicketDetailView(DetailView):
     model = Ticket
     template_name = "tickets/ticket_detail.html"
 
+# Create ticket View
 class CreateTicketView(CreateView):
     model = Ticket
     template_name = 'tickets/create_ticket.html'
@@ -51,9 +54,34 @@ class CreateTicketView(CreateView):
     def get_success_url(self):
         return '/tickets/'
 
-
+# Update Ticket View
 class TicketUpdateView(UpdateView):
     model = Ticket
     template_name = 'tickets/update_ticket.html'
     fields = ['title', 'job_category', 'job_description', 'location', 'priority' ]
     success_url = reverse_lazy('tickets')
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['JOB_CATEGORY'] = JOB_CATEGORY
+        context['PRIORITY'] = PRIORITY
+        return context
+
+    def update_ticket(request, slug):
+        ticket = get_object_or_404(Ticket, slug=slug)
+    
+        if request.method == 'POST':
+            form = TicketUpdateForm(request.POST, instance=ticket)
+            if form.is_valid():
+                form.save()
+                return redirect('ticket_detail', slug=slug)
+        else:
+            form = TicketUpdateForm(instance=ticket)
+    
+        context = {
+            'form': form,
+            'ticket': ticket,
+            'JOB_CATEGORY': JOB_CATEGORY,
+            'PRIORITY': PRIORITY,
+        }
+        return render(request, 'tickets/update_tickets.html', context)
