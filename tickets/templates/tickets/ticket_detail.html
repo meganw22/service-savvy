@@ -5,18 +5,30 @@
 <div class="container mt-5">
     <div class="row">
         <div class="col-md-8">
-            <div class="card">
-                <div class="card-body">
-                    <h2 class="card-title">{{ ticket.title }}</h2>
-                    <p class="card-text"><strong>Description:</strong> {{ ticket.job_description }}</p>
-                    <p class="card-text"><strong>Location:</strong> {{ ticket.location }}</p>
-                    <p class="card-text"><strong>Username:</strong> {{ ticket.username }}</p>
-                    <p class="card-text"><strong>Created On:</strong> {{ ticket.created_on }}</p>
-                    <p class="card-text">Is Complete? {{ ticket.is_complete }}</p>
-                </div>
+            <h2>{{ ticket.title }}</h2>
+            <hr>
+            <div class="row mb-3">
+                <div class="col-md-4 fw-bold">Description:</div>
+                <div class="col-md-8">{{ ticket.job_description }}</div>
             </div>
-            <div class="mt-3">
-                <a href="#" class="btn btn-primary me-2">Update</a>
+            <div class="row mb-3">
+                <div class="col-md-4 fw-bold">Category:</div>
+                <div class="col-md-8">{{ ticket.job_category }}</div>
+            </div>
+            <div class="row mb-3">
+                <div class="col-md-4 fw-bold">Location:</div>
+                <div class="col-md-8">{{ ticket.location }}</div>
+            </div>
+            <div class="row mb-3">
+                <div class="col-md-4 fw-bold">Username:</div>
+                <div class="col-md-8">{{ ticket.username }}</div>
+            </div>
+            <div class="row mb-3">
+                <div class="col-md-4 fw-bold">Created On:</div>
+                <div class="col-md-8">{{ ticket.created_on }}</div>
+            </div>
+            <div class="mt-5">
+                <a href="{% url 'update_ticket' ticket.slug %}" class="btn btn-primary me-2">Update</a>
                 <a href="{% url 'tickets' %}" class="btn btn-secondary">Return to Tickets</a>
             </div>
         </div>

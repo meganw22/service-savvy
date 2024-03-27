@@ -1,8 +1,9 @@
 from django.shortcuts import get_object_or_404, redirect
 from django.http import JsonResponse
-from django.views.generic import ListView, DetailView, CreateView
+from django.views.generic import ListView, DetailView, CreateView, UpdateView
 from django.template.loader import render_to_string
 from .models import Ticket, JOB_CATEGORY, PRIORITY
+from django.urls import reverse_lazy
 
 # Create your views here.
 class TicketListView(ListView):
@@ -49,3 +50,10 @@ class CreateTicketView(CreateView):
 
     def get_success_url(self):
         return '/tickets/'
+
+
+class TicketUpdateView(UpdateView):
+    model = Ticket
+    template_name = 'tickets/update_ticket.html'
+    fields = ['title', 'job_category', 'job_description', 'location', 'priority' ]
+    success_url = reverse_lazy('tickets')

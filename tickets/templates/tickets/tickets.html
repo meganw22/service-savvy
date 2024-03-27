@@ -31,12 +31,17 @@
                         <div>
                             <label for="sortBy" class="form-label">Sort By:</label>
                             <select class="form-select" id="sortBy" name="sort_by">
-                                <option value="priority" {% if selected_sort_by == 'priority' %}selected{% endif %}>Priority</option>
-                                <option value="username" {% if selected_sort_by == 'username' %}selected{% endif %}>Username</option>
-                                <option value="created_on" {% if selected_sort_by == 'created_on' %}selected{% endif %}>Date Created</option>
+                                <option value="priority" {% if selected_sort_by == "priority" %}selected{% endif %}>
+                                    Priority</option>
+                                <option value="username" {% if selected_sort_by == "username" %}selected{% endif %}>
+                                    Username</option>
+                                <option value="created_on" {% if selected_sort_by == "created_on" %}selected{% endif %}>
+                                    Date Created</option>
+
                             </select>
                         </div>
-                        <button type="submit" class="btn btn-primary mx-3" style="background-color: #00323c">Apply</button>
+                        <button type="submit" class="btn btn-primary mx-3"
+                            style="background-color: #00323c">Apply</button>
                     </div>
                 </form>
 
@@ -48,34 +53,35 @@
                             <h4 class="card-title">{{ ticket.title }}</h4>
                         </a>
                         <p class="text-end mb-0">User: {{ ticket.username }}</p>
-                        <p class="text-end mb-0">Priority: {{ ticket.priority }}</p>
+                        <p class="text-end mb-0">Priority: {{ ticket.get_priority_display }}</p>
                     </div>
                 </div>
                 {% endfor %}
 
-                <!--Pagination-->
-                {% if is_paginated %}
-                <nav aria-label="Page navigation">
-                    <ul class="pagination justify-content-center">
-                        {% if page_obj.has_previous %}
-                        <li><a href="?page={{ page_obj.previous_page_number }}" class="page-link">&laquo; PREV </a></li>
-                        {% endif %}
-                        {% if page_obj.has_next %}
-                        <li><a href="?page={{ page_obj.next_page_number }}" class="page-link"> NEXT &raquo;</a></li>
-                        {% endif %}
-                    </ul>
-                </nav>
-                {% endif %}
+                    <!--Pagination-->
+                    {% if is_paginated %}
+                    <nav aria-label="Page navigation">
+                        <ul class="pagination justify-content-center">
+                            {% if page_obj.has_previous %}
+                            <li><a href="?page={{ page_obj.previous_page_number }}" class="page-link">&laquo; PREV </a>
+                            </li>
+                            {% endif %}
+                            {% if page_obj.has_next %}
+                            <li><a href="?page={{ page_obj.next_page_number }}" class="page-link"> NEXT &raquo;</a></li>
+                            {% endif %}
+                        </ul>
+                    </nav>
+                    {% endif %}
+                </div>
             </div>
         </div>
-    </div>
 
-    {% endblock content %}
+        {% endblock content %}
 
-    <script>
-        // Submit the form when the priority is changed
-        document.getElementById('sortBy').addEventListener('change', function() {
-            document.getElementById('filterForm').submit();
-        });
+        <script>
+            // Submit the form when the priority is changed
+            document.getElementById('sortBy').addEventListener('change', function () {
+                document.getElementById('filterForm').submit();
+            });
 
-    </script>
+        </script>

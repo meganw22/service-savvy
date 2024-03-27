@@ -18,8 +18,8 @@
                     <label for="job_category" class="form-label">Job Category</label>
                     <select class="form-select" id="job_category" name="job_category" required>
                         <option value="">Select Job Category</option>
-                        {% for category in JOB_CATEGORY %}
-                            <option value="{{ category.0 }}">{{ category.1 }}</option>
+                        {% for category_value, category_label in JOB_CATEGORY %}
+                        <option value="{{ category_value }}">{{ category_label }}</option>
                         {% endfor %}
                     </select>
                 </div>
@@ -36,12 +36,13 @@
                     <label for="priority" class="form-label">Priority</label>
                     <select class="form-select" id="priority" name="priority" required>
                         <option value="">Select Priority</option>
-                        {% for priority in PRIORITY %}
-                            <option value="{{ priority.0 }}">{{ priority.1 }}</option>
+                        {% for priority_value, priority_label in PRIORITY %}
+                        <option value="{{ priority_value }}">{{ priority_label }}</option>
                         {% endfor %}
                     </select>
                 </div>
-                <button type="submit" class="btn btn-primary my-3" style="background-color:#00856f">Create Ticket</button>
+                <button type="submit" class="btn btn-primary my-3" style="background-color:#00856f">Create
+                    Ticket</button>
                 <div class="col-md-6 text-end mb-4">
                     <a href="{% url 'tickets' %}" class="btn btn-secondary">Cancel</a>
                 </div>
