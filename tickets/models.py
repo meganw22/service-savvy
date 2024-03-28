@@ -34,7 +34,6 @@ class Ticket(models.Model):
     priority = models.IntegerField(choices=PRIORITY, default=0)
     is_complete = models.BooleanField(default=False)
     updated_on = models.DateTimeField(auto_now=True)
-    
 
     class Meta:
         ordering = ["priority"]

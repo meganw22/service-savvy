@@ -1,5 +1,6 @@
 {% extends 'base.html' %}
 {% load static %}
+{% load crispy_forms_tags %}
 
 {% block content %}
 <div class="container mt-5">
@@ -30,11 +31,13 @@
             <div class="mt-5 d-flex justify-content-between flex-wrap">
                 <a href="{% url 'tickets' %}" class="btn btn-secondary m-3">Return to Tickets</a>
                 {% if user.is_authenticated %}
+                {% if ticket.username == user %}
                 <div class="m-3 d-flex flex-wrap">
                     <a href="{% url 'update_ticket' ticket.slug %}" class="btn btn-primary me-2 mb-2 mb-md-0">Update
                         Ticket</a>
                     <a href="#" class="btn btn-danger me-2 mb-2 mb-md-0">Delete Ticket</a>
                 </div>
+                {% endif %}
                 {% endif %}
 
             </div>
@@ -60,6 +63,20 @@
                 <div class="comment-body">{{ comment.body }}</div>
             </div>
             {% endfor %}
+            <hr>
+            <div>
+                {% if user.is_authenticated %}
+                <h5>Leave a comment as {{ user.username }}:</h5>
+                <form id="commentForm" method="post" style="margin-top: 1.3em;">
+                    {% csrf_token %}
+                    {{ comment_form | crispy }}
+                    <button id="submitButton" type="submit" class="btn btn-signup"
+                        style="background-color: #69d2c1;">Submit</button>
+                </form>
+                {% else %}
+                <p>Log in to leave a comment</p>
+                {% endif %}
+            </div>
 
             <p>Ticket updates to be displayed here</p>
 

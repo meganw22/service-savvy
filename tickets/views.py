@@ -2,9 +2,9 @@ from django.shortcuts import get_object_or_404, redirect
 from django.http import JsonResponse
 from django.views.generic import ListView, DetailView, CreateView, UpdateView
 from django.template.loader import render_to_string
-from .models import Ticket, JOB_CATEGORY, PRIORITY
+from .models import Ticket, JOB_CATEGORY, PRIORITY, Comment
 from django.urls import reverse_lazy
-from .forms import TicketUpdateForm
+from .forms import TicketUpdateForm, CommentForm
 
 # Ticket List View
 class TicketListView(ListView):
@@ -37,6 +37,7 @@ class TicketDetailView(DetailView):
         context = super().get_context_data(**kwargs)
         ticket = self.get_object()
         context['comments'] = ticket.comments.all()
+        context['comment_form'] = CommentForm()
         return context
 
 # Create ticket View
