@@ -13,13 +13,16 @@
                     class="card-img-top img-fluid" style="height: 25vh; object-fit: cover;">
                 <div class="card-body text-center">
                     <h1 class="card-title mb-4">Welcome to the Service Savvy Portal</h1>
-                    <p class="card-text md-intro fw-medium">
+                    <p class="card-text md-intro fw-medium ">
                         Service Savvy is your go-to maintenance solution. Trust
                         our dedicated team to swiftly handle your maintenance needs, so you can focus on your business.
                     </p>
                     {% if user.is_authenticated %}
-                    <p class="card-text md-intro fw-medium">
-                        Welcome back {{ user.username }}! Create or Amend tickets here!
+                    <p class="card-text bold-font fw-medium">
+                        Welcome back {{ user.username }}! 
+                    </p>
+                    <p class="card-text fw-medium">
+                        Create or Amend tickets here!
                     </p>
                     <div class="text-center">
                         <a href="{% url 'tickets' %}" class="btn btn-primary px-4 mx-3"
@@ -40,7 +43,8 @@
                 <div class="card-body text-center">
                     <h1 class="card-title mb-4">Emergency contact details</h1>
                     <p class="card-text fw-medium ">On-call 24/7 maintenance number:</p>
-                    <h4 class="card-text lead text-danger fs-4">(+44) 07789 123456</h4>
+                    <h4 class="card-text lead bold-font text-danger fs-4">(+44) 07789 123456</h4>
+                    <p>Only use this number if you need immediate and emergency support. Please raise a ticket for non-emergency requests</p>
                 </div>
             </div>
         </div>

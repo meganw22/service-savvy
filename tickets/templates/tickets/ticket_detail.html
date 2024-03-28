@@ -31,8 +31,8 @@
                 <a href="{% url 'tickets' %}" class="btn btn-secondary m-3">Return to Tickets</a>
                 {% if user.is_authenticated %}
                 <div class="m-3 d-flex flex-wrap">
-                    <a href="{% url 'update_ticket' ticket.slug %}"
-                        class="btn btn-primary me-2 mb-2 mb-md-0">Update Ticket</a>
+                    <a href="{% url 'update_ticket' ticket.slug %}" class="btn btn-primary me-2 mb-2 mb-md-0">Update
+                        Ticket</a>
                     <a href="#" class="btn btn-danger me-2 mb-2 mb-md-0">Delete Ticket</a>
                 </div>
                 {% endif %}
@@ -44,8 +44,23 @@
         </div> -->
     </div>
 </div>
-<p>Comment section to be put here</p>
-<p>Ticket updates to be displayed here</p>
-{% endblock content %}
 
-<!-- {% url 'update_ticket' ticket.id %} -->
+<!--Comments Section-->
+<div class="container mt-5">
+    <div class="row">
+        <div class="col-md-8">
+            <h3>Comments</h3>
+            <hr>
+            {% for comment in comments %}
+            <div class="comment-container">
+                <div class="comment-header">
+                    <span class="comment-username">{{ comment.username }}: </span>
+                    <span class="comment-date">{{ comment.created_on }}</span>
+                </div>
+                <div class="comment-body">{{ comment.body }}</div>
+            </div>
+            {% endfor %}
+
+            <p>Ticket updates to be displayed here</p>
+
+            {% endblock content %}

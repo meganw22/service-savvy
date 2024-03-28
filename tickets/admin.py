@@ -10,7 +10,10 @@ class TicketAdmin(SummernoteModelAdmin):
     list_filter = ('priority',)
     summernote_fields = ('content',)
 
+@admin.register(Comment)
+class CommentAdmin(admin.ModelAdmin):
+    list_display = ('ticket', 'username', 'body')
+
 # Register your models here.
-admin.site.register(Comment)
+# admin.site.register(Comment)
 admin.site.register(Archive)
-# admin.site.register(TicketAdmin)

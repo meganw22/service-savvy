@@ -63,7 +63,7 @@ class Comment(models.Model):
     class Meta:
         ordering = ["created_on"]
     def __str__(self):
-        return f"Comment {self.body} by {self.username}"
+        return f"{self.body} by {self.username}"
 
 class Archive(models.Model):
     ticket = models.ForeignKey(Ticket, on_delete=models.CASCADE)

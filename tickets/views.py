@@ -33,6 +33,12 @@ class TicketDetailView(DetailView):
     model = Ticket
     template_name = "tickets/ticket_detail.html"
 
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        ticket = self.get_object()
+        context['comments'] = ticket.comments.all()
+        return context
+
 # Create ticket View
 class CreateTicketView(CreateView):
     model = Ticket

@@ -46,11 +46,12 @@
                         {% endfor %}
                     </select>
                 </div>
-                <div class="d-flex flex-wrap justify-content-between">
-                    <button type="submit" class="btn btn-primary my-3" style="background-color: #00323c">Update
-                        Ticket</button>
-                    <div class="col-md-6 text-end mb-4">
-                        <a href="{% url 'tickets' %}" class="btn btn-secondary">Cancel</a>
+                <div class="row">
+                    <div class="col-md-6 d-flex justify-content-center">
+                        <button type="submit" class="btn btn-primary my-3" style="background-color: #00323c">Update Ticket</button>
+                    </div>
+                    <div class="col-md-6 d-flex justify-content-center">
+                        <a href="{% url 'tickets' %}" class="btn btn-secondary my-3">Cancel</a>
                     </div>
                 </div>
 
