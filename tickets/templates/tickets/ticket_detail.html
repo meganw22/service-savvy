@@ -28,7 +28,7 @@
                 <div class="col-md-4 fw-bold">Created On:</div>
                 <div class="col-md-8">{{ ticket.created_on }}</div>
             </div>
-            <div class="mt-5 d-flex justify-content-between flex-wrap">
+            <div class="mt-3 d-flex justify-content-between flex-wrap">
                 <a href="{% url 'tickets' %}" class="btn btn-secondary m-3">Return to Tickets</a>
                 {% if user.is_authenticated %}
                 {% if ticket.username == user %}
@@ -52,8 +52,10 @@
 <div class="container mt-5">
     <div class="row">
         <div class="col-md-8">
+            <!--Submitted comments-->
             <h3>Comments</h3>
             <hr>
+            {% if comments %}
             {% for comment in comments %}
             <div class="comment-container">
                 <div class="comment-header">
@@ -63,21 +65,22 @@
                 <div class="comment-body">{{ comment.body }}</div>
             </div>
             {% endfor %}
+            {% else %}
+            <p>No comments just yet...</p>
+            {% endif %}
             <hr>
+            <!--add new comment-->
             <div>
                 {% if user.is_authenticated %}
                 <h5>Leave a comment as {{ user.username }}:</h5>
-                <form id="commentForm" method="post" style="margin-top: 1.3em;">
+                <form method="post" action="">
                     {% csrf_token %}
-                    {{ comment_form | crispy }}
-                    <button id="submitButton" type="submit" class="btn btn-signup"
-                        style="background-color: #69d2c1;">Submit</button>
+                    <textarea name="body" rows="4" cols="50" class="comment-container"></textarea><br>
+                    <button type="submit" class="btn btn-primary" style="background-color: #00856f">Submit Comment</button>
                 </form>
                 {% else %}
                 <p>Log in to leave a comment</p>
                 {% endif %}
             </div>
-
-            <p>Ticket updates to be displayed here</p>
 
             {% endblock content %}

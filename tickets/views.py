@@ -4,7 +4,7 @@ from django.views.generic import ListView, DetailView, CreateView, UpdateView
 from django.template.loader import render_to_string
 from .models import Ticket, JOB_CATEGORY, PRIORITY, Comment
 from django.urls import reverse_lazy
-from .forms import TicketUpdateForm, CommentForm
+from .forms import TicketUpdateForm
 
 # Ticket List View
 class TicketListView(ListView):
@@ -32,13 +32,26 @@ class TicketListView(ListView):
 class TicketDetailView(DetailView):
     model = Ticket
     template_name = "tickets/ticket_detail.html"
+    slug_field = 'slug'
+
+    def get_object(self, queryset=None):
+        slug = self.kwargs.get(self.slug_url_kwarg)
+        queryset = self.get_queryset()
+        return get_object_or_404(queryset, slug=slug)
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        ticket = self.get_object()
+        ticket = self.object
         context['comments'] = ticket.comments.all()
-        context['comment_form'] = CommentForm()
         return context
+
+    def post(self, request, *args, **kwargs):
+        ticket = self.get_object()
+        body = request.POST.get('body')
+        if body:
+            comment = Comment.objects.create(ticket=ticket, username=request.user, body=body)
+            comment.save()
+        return redirect('ticket_detail', slug=ticket.slug)
 
 # Create ticket View
 class CreateTicketView(CreateView):
