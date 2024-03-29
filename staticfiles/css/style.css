@@ -100,10 +100,39 @@ body {
     color: green;
 }
 
+/* Comment Styles */
+
+.comment-container {
+    border: 1px solid #ccc;
+    background-color: #fff;
+    border-radius: 5px;
+    padding: 10px;
+    margin-bottom: 10px;
+}
+
+.comment-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 5px;
+}
+
+.comment-username {
+    font-weight: bold;
+}
+
+.comment-date {
+    color: #666;
+    font-size: 0.8em;
+}
+
+.comment-body {
+    margin-top: 5px;
+}
 
 @media screen and (min-width: 768px) {
     .md-intro {
-        padding: 1em 5em;
+        padding: 1em 4em;
     }
 }
 

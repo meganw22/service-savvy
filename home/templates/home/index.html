@@ -9,7 +9,7 @@
         <!-- Card column -->
         <div class="col-md-12 p-3">
             <div class="card">
-                <img src="/static/images/francesco-ungaro-2835436.jpg" alt="mountains header"
+                <img src="/static/images/homepage-pic.jpg" alt="mountains header"
                     class="card-img-top img-fluid" style="height: 25vh; object-fit: cover;">
                 <div class="card-body text-center">
                     <h1 class="card-title mb-4">Welcome to the Service Savvy Portal</h1>
@@ -18,15 +18,12 @@
                         our dedicated team to swiftly handle your maintenance needs, so you can focus on your business.
                     </p>
                     {% if user.is_authenticated %}
-                    <p class="card-text bold-font fw-medium">
-                        Welcome back {{ user.username }}! 
-                    </p>
-                    <p class="card-text fw-medium">
-                        Create or Amend tickets here!
-                    </p>
+                    <h5 class="card-text bold-font fw-medium mb-3">
+                        Welcome {{ user.username }}! 
+                    </h5>
                     <div class="text-center">
                         <a href="{% url 'tickets' %}" class="btn btn-primary px-4 mx-3"
-                            style="background-color: #00856f">View Tickets</a>
+                            style="background-color: #00856f">Create or Amend tickets here!</a>
                     </div>
                     {% else %}
                     <p class="card-text md-intro fw-medium">
