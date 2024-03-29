@@ -4,19 +4,25 @@ from django.views.generic import ListView, DetailView, CreateView, UpdateView
 from django.template.loader import render_to_string
 from .models import Ticket, JOB_CATEGORY, PRIORITY, Comment
 from django.urls import reverse_lazy
-from .forms import TicketUpdateForm
+from django.contrib.auth.mixins import LoginRequiredMixin
 
 # Ticket List View
-class TicketListView(ListView):
+class TicketListView(LoginRequiredMixin, ListView):
     queryset = Ticket.objects.all()
     template_name = "tickets/tickets.html"
     paginate_by = 6
 
-    # Sort ticket list
+    # Sort ticket list 
     def get_queryset(self):
         queryset = super().get_queryset()
-        sort_by = self.request.GET.get('sort_by', 'priority_high')
 
+        #Sort User tickets only
+        show_own_tickets = self.request.GET.get('own_tickets', False)
+        if show_own_tickets:
+            queryset = queryset.filter(username=self.request.user)
+
+        # Sort all user tickets
+        sort_by = self.request.GET.get('sort_by', 'priority_high')
         if sort_by == 'priority_high':
             queryset = queryset.order_by('priority')
         elif sort_by == 'priority_low':
@@ -31,6 +37,7 @@ class TicketListView(ListView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context['selected_sort_by'] = self.request.GET.get('sort_by', 'priority_high')
+        context['show_own_tickets'] = self.request.GET.get('own_tickets', False)
         return context
 
 # Ticket Detail View
@@ -82,7 +89,6 @@ class TicketUpdateView(UpdateView):
     model = Ticket
     template_name = 'tickets/update_ticket.html'
     fields = ['title', 'job_category', 'job_description', 'location', 'priority' ]
-    success_url = reverse_lazy('tickets')
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
@@ -90,21 +96,6 @@ class TicketUpdateView(UpdateView):
         context['PRIORITY'] = PRIORITY
         return context
 
-    def update_ticket(request, slug):
-        ticket = get_object_or_404(Ticket, slug=slug)
-    
-        if request.method == 'POST':
-            form = TicketUpdateForm(request.POST, instance=ticket)
-            if form.is_valid():
-                form.save()
-                return redirect('ticket_detail', slug=slug)
-        else:
-            form = TicketUpdateForm(instance=ticket)
-    
-        context = {
-            'form': form,
-            'ticket': ticket,
-            'JOB_CATEGORY': JOB_CATEGORY,
-            'PRIORITY': PRIORITY,
-        }
-        return render(request, 'tickets/update_tickets.html', context)
+    def form_valid(self, form):
+        form.instance.username = self.request.user
+        return super().form_valid(form)

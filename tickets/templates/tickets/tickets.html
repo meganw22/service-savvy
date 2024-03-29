@@ -41,9 +41,16 @@
                                         Oldest Created</option>
                             </select>
                         </div>
-                        <button type="submit" class="btn btn-primary mx-3"
-                            style="background-color: #00323c">Apply</button>
+                        <!-- <button type="submit" class="btn btn-primary mx-3"
+                            style="background-color: #00323c">Apply</button> -->
                     </div>
+                </form>
+
+                <!--User tickets only checkbox-->
+                <form method="get" action="{% url 'tickets' %}" class="text-end mb-2" id="ownTicketsForm">
+                    <input type="checkbox" id="own_tickets" name="own_tickets" {% if show_own_tickets %}checked{% endif %}>
+                    <label for="own_tickets">Show Only My Tickets</label>
+                    <input type="submit" value="Apply Filter" style="display: none;">
                 </form>
 
                 <!--List of tickets-->
@@ -80,11 +87,3 @@
         </div>
 
         {% endblock content %}
-
-        <script>
-            // Submit the form when the priority is changed
-            document.getElementById('sortBy').addEventListener('change', function () {
-                document.getElementById('filterForm').submit();
-            });
-
-        </script>
