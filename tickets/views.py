@@ -78,6 +78,10 @@ class CreateTicketView(CreateView):
         return context
 
     def form_valid(self, form):
+        title = form.cleaned_data['title']
+        if Ticket.objects.filter(title=title).exists():
+            form.add_error('title', 'A ticket with this title already exists.')
+            return self.form_invalid(form)
         form.instance.username = self.request.user
         return super().form_valid(form)
 
@@ -98,4 +102,7 @@ class TicketUpdateView(UpdateView):
 
     def form_valid(self, form):
         form.instance.username = self.request.user
+        if form.instance.is_complete:
+            form.instance.completed_by = self.request.user
+            form.instance.completed_at = timezone.now()
         return super().form_valid(form)

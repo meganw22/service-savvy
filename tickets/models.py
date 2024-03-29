@@ -22,8 +22,8 @@ PRIORITY = (
 
 # Create your models here.
 class Ticket(models.Model):
-    title = models.CharField(max_length=200)
-    slug = models.SlugField(null=True)
+    title = models.CharField(max_length=200, unique=True)
+    slug = models.SlugField(null=True, unique=True)
     username = models.ForeignKey(
         User, on_delete=models.CASCADE, related_name="user_tickets"
     )
@@ -33,10 +33,14 @@ class Ticket(models.Model):
     location = models.TextField(max_length=200)
     priority = models.IntegerField(choices=PRIORITY, default=0)
     is_complete = models.BooleanField(default=False)
+    completed_by = models.ForeignKey(
+        User, on_delete=models.SET_NULL, blank=True, null=True, related_name="completed_tickets"
+    )
+    completed_at = models.DateTimeField(null=True, blank=True)
     updated_on = models.DateTimeField(auto_now=True)
 
     class Meta:
-        ordering = ["priority"]
+        ordering = ["created_on"]
 
     def __str__(self):
         return f"Request: {self.title}"
