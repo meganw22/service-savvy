@@ -1,6 +1,6 @@
 from django.shortcuts import get_object_or_404, redirect
 from django.http import JsonResponse
-from django.views.generic import ListView, DetailView, CreateView, UpdateView
+from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView
 from django.template.loader import render_to_string
 from .models import Ticket, JOB_CATEGORY, PRIORITY, Comment
 from django.urls import reverse_lazy
@@ -106,3 +106,16 @@ class TicketUpdateView(UpdateView):
             form.instance.completed_by = self.request.user
             form.instance.completed_at = timezone.now()
         return super().form_valid(form)
+
+# Delete Ticket View
+class TicketDeleteView(DeleteView):
+    model = Ticket
+    success_url = reverse_lazy('tickets')
+    template_name = 'tickets/delete_ticket.html'
+
+# Delete Comment View
+class CommentDeleteView(DeleteView):
+    model = Comment
+    template_name = 'tickets/delete_comment.html'
+    def get_success_url(self):
+        return reverse_lazy('ticket_detail', kwargs={'slug': self.object.ticket.slug})
