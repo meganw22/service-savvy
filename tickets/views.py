@@ -12,20 +12,25 @@ class TicketListView(ListView):
     template_name = "tickets/tickets.html"
     paginate_by = 6
 
+    # Sort ticket list
     def get_queryset(self):
         queryset = super().get_queryset()
-        sort_by = self.request.GET.get('sort_by', 'priority')
-        
-        if sort_by == 'priority':
+        sort_by = self.request.GET.get('sort_by', 'priority_high')
+
+        if sort_by == 'priority_high':
             queryset = queryset.order_by('priority')
-        elif sort_by == 'created_on':
+        elif sort_by == 'priority_low':
+            queryset = queryset.order_by('-priority')
+        elif sort_by == 'created_newest':
+            queryset = queryset.order_by('-created_on')
+        elif sort_by == 'created_oldest':
             queryset = queryset.order_by('created_on')
-        
+
         return queryset
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context['selected_sort_by'] = self.request.GET.get('sort_by', 'priority')  # Default to 'priority' if not provided
+        context['selected_sort_by'] = self.request.GET.get('sort_by', 'priority_high')
         return context
 
 # Ticket Detail View

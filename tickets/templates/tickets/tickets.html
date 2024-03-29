@@ -31,11 +31,14 @@
                         <div>
                             <label for="sortBy" class="form-label">Sort By:</label>
                             <select class="form-select" id="sortBy" name="sort_by">
-                                <option value="priority" {% if selected_sort_by == "priority" %}selected{% endif %}>
-                                    Priority</option>
-                                <option value="created_on" {% if selected_sort_by == "created_on" %}selected{% endif %}>
-                                    Date Created</option>
-
+                                <option value="priority_high" {% if selected_sort_by == "priority_high" %}selected{% endif %}>
+                                    High Priority</option>
+                                <option value="priority_low" {% if selected_sort_by == "priority_low" %}selected{% endif %}>
+                                        Low Priority</option>
+                                <option value="created_newest" {% if selected_sort_by == "created_newest" %}selected{% endif %}>
+                                    Newest Created</option>
+                                <option value="created_oldest" {% if selected_sort_by == "created_oldest" %}selected{% endif %}>
+                                        Oldest Created</option>
                             </select>
                         </div>
                         <button type="submit" class="btn btn-primary mx-3"
