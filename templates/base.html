@@ -73,7 +73,7 @@
                                     href="{% url 'account_signup' %}">Register</a></li>
                             <li><a class="dropdown-item {% if request.path == login_url %}active{% endif %}"
                                     href="{% url 'account_login' %}">Log in</a></li>
-                                    
+
                             {% endif %}
                         </ul>
                     </li>
@@ -82,6 +82,20 @@
         </div>
     </header>
 
+    <!-- displaying Django messages -->
+    <div class="container">
+        <div class="row">
+            <div class="col-md-8 offset-md-2">
+                {% for message in messages %}
+                <div class="alert alert-dismissible fade show {% if message.tags == 'success' %}alert-primary{% elif message.tags == 'error' %}alert-danger{% endif %}"
+                    role="alert">
+                    {{ message | safe }}
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
 
 
     <!-- Navigation -->
@@ -113,6 +127,6 @@
         integrity="sha384-gtEjrD/SeCtmISkJkNUaaKMoLD0//ElJ19smozuHV6z3Iehds+3Ulb9Bn9Plx0x4"
         crossorigin="anonymous"></script>
     <script src="{% static 'js/script.js' %}"></script>
-</body>
 
+</body>
 </html>

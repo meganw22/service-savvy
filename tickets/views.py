@@ -1,10 +1,14 @@
-from django.shortcuts import get_object_or_404, redirect
-from django.http import JsonResponse
+from django.shortcuts import get_object_or_404, redirect, reverse
+from django.http import JsonResponse, HttpResponseRedirect
 from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView
 from django.template.loader import render_to_string
 from .models import Ticket, JOB_CATEGORY, PRIORITY, Comment
+from .forms import CommentForm
 from django.urls import reverse_lazy
 from django.contrib.auth.mixins import LoginRequiredMixin
+from django.contrib.auth.decorators import login_required
+from django.contrib import messages
+
 
 # Ticket List View
 class TicketListView(LoginRequiredMixin, ListView):
@@ -55,15 +59,9 @@ class TicketDetailView(DetailView):
         context = super().get_context_data(**kwargs)
         ticket = self.object
         context['comments'] = ticket.comments.all()
+        context['comment_form'] = CommentForm()
         return context
 
-    def post(self, request, *args, **kwargs):
-        ticket = self.get_object()
-        body = request.POST.get('body')
-        if body:
-            comment = Comment.objects.create(ticket=ticket, username=request.user, body=body)
-            comment.save()
-        return redirect('ticket_detail', slug=ticket.slug)
 
 # Create ticket View
 class CreateTicketView(CreateView):
@@ -113,9 +111,16 @@ class TicketDeleteView(DeleteView):
     success_url = reverse_lazy('tickets')
     template_name = 'tickets/delete_ticket.html'
 
-# Delete Comment View
-class CommentDeleteView(DeleteView):
-    model = Comment
-    template_name = 'tickets/delete_comment.html'
-    def get_success_url(self):
-        return reverse_lazy('ticket_detail', kwargs={'slug': self.object.ticket.slug})
+
+# Delete User Comments
+
+@login_required
+def delete_comment(request, comment_id):
+    comment = get_object_or_404(Comment, id=comment_id)
+    ticket_slug = comment.ticket.slug
+    if comment.username == request.user:
+        comment.delete()
+        messages.success(request, 'Comment deleted successfully.')
+    else:
+        messages.error(request, 'You do not have permission to delete this comment.')
+    return redirect('ticket_detail', slug=ticket_slug)
