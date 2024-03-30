@@ -36,7 +36,7 @@ class Ticket(models.Model):
     completed_by = models.ForeignKey(
         User, on_delete=models.SET_NULL, blank=True, null=True, related_name="completed_tickets"
     )
-    completed_at = models.DateTimeField(null=True, blank=True)
+    completed_at = models.DateTimeField(null=True, blank=True, auto_now_add=True)
     updated_on = models.DateTimeField(auto_now=True)
 
     class Meta:

@@ -8,7 +8,7 @@ from django.urls import reverse_lazy
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.auth.decorators import login_required
 from django.contrib import messages
-
+from django.utils.timezone import now
 
 # Ticket List View
 class TicketListView(LoginRequiredMixin, ListView):
@@ -146,9 +146,11 @@ def complete_ticket(request, ticket_slug):
     if ticket.is_complete:
         ticket.is_complete = False
         ticket.completed_by = None
+        ticket.completed_at = None
     else:
         ticket.is_complete = True
         ticket.completed_by = request.user
+        ticket.completed_at = now()
     ticket.save()
 
     return redirect('ticket_detail', slug=ticket.slug)
