@@ -36,7 +36,7 @@ class TicketListView(LoginRequiredMixin, ListView):
         elif sort_by == 'created_oldest':
             queryset = queryset.filter(is_complete=False).order_by('created_on', 'priority')
         elif sort_by == 'completed':
-            queryset = queryset.filter(is_complete=True).order_by('is_complete', 'created_on')
+            queryset = queryset.filter(is_complete=True).order_by('-completed_at', 'created_on')
         else:
             queryset = queryset.order_by('priority', 'created_on')
 
