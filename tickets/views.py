@@ -68,6 +68,7 @@ class TicketDetailView(DetailView):
         if body:
             comment = Comment.objects.create(ticket=ticket, username=request.user, body=body)
             comment.save()
+            messages.success(self.request, 'Comment created successfully')
         return redirect('ticket_detail', slug=ticket.slug)
 
 # Create ticket View
@@ -88,6 +89,7 @@ class CreateTicketView(CreateView):
             form.add_error('title', 'A ticket with this title already exists.')
             return self.form_invalid(form)
         form.instance.username = self.request.user
+        messages.success(self.request, 'Ticket created successfully')
         return super().form_valid(form)
 
     def get_success_url(self):
@@ -110,6 +112,8 @@ class TicketUpdateView(UpdateView):
         if form.instance.is_complete:
             form.instance.completed_by = self.request.user
             form.instance.completed_at = timezone.now()
+
+        messages.success(self.request, 'Ticket updated successfully')
         return super().form_valid(form)
 
 # Delete Ticket View

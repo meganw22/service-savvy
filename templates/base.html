@@ -87,7 +87,7 @@
         <div class="row">
             <div class="col-md-8 offset-md-2">
                 {% for message in messages %}
-                <div class="alert alert-dismissible fade show {% if message.tags == 'success' %}alert-primary{% elif message.tags == 'error' %}alert-danger{% endif %}"
+                <div class="alert alert-dismissible fade show mt-3 {% if message.tags == 'success' %}alert-primary{% elif message.tags == 'error' %}alert-danger{% endif %}"
                     role="alert">
                     {{ message | safe }}
                     <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
@@ -118,7 +118,7 @@
     <footer class="footer fixed-bottom mt-auto py-3">
         <div class="container text-center">
             <p class="m-0">
-                Service Savvy Maintenance Company | Copyright 2024
+                Service Savvy | Copyright 2024
             </p>
         </div>
     </footer>
