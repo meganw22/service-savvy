@@ -8,7 +8,12 @@ class About(models.Model):
     job_title = models.CharField(max_length=100)
     email = models.CharField(max_length=100)
     tel = models.CharField(max_length=100)
-    member_since = models.DateTimeField(auto_now=True)
+    member_since = models.DateTimeField()
 
     def __str__(self):
         return self.full_name
+
+    def save(self, *args, **kwargs):
+        if not self.pk and not self.member_since:
+            self.member_since = self.user.date_joined
+        super(),save(*args, **kwargs)

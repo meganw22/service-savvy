@@ -20,7 +20,7 @@ PRIORITY = (
     (2, "Low (1 day +)"),
 )
 
-# Create your models here.
+# Ticket Model
 class Ticket(models.Model):
     title = models.CharField(max_length=200, unique=True)
     slug = models.SlugField(null=True, unique=True)
@@ -52,7 +52,7 @@ class Ticket(models.Model):
         self.slug = slugify(self.title)
         super(Ticket, self).save(*args, **kwargs)
 
-
+# Comment Model
 class Comment(models.Model):
     ticket = models.ForeignKey(
         Ticket, on_delete=models.CASCADE, related_name="comments"
@@ -68,6 +68,7 @@ class Comment(models.Model):
     def __str__(self):
         return f"{self.body} by {self.username}"
 
+# Archive Model
 class Archive(models.Model):
     ticket = models.ForeignKey(Ticket, on_delete=models.CASCADE)
     archived_at = models.DateTimeField(auto_now_add=True)

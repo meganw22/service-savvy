@@ -10,7 +10,42 @@
             <p>Please update the details of the ticket</p>
             <form method="post" enctype="multipart/form-data">
                 {% csrf_token %}
-                {% include 'tickets/ticket_form.html' %}
+                <div class="mb-3">
+                    <label for="title" class="form-label">Title</label>
+                    <input type="text" class="form-control" id="title" name="title" value="{{ticket.title}}" required>
+                </div>
+                <div class="mb-2">
+                    <label for="job_category" class="form-label">Job Category</label>
+                    <select class="form-select" id="job_category" name="job_category" required>
+                        <option value="">Select Job Category</option>
+                        {% for category_value, category_label in JOB_CATEGORY %}
+                            <option value="{{ category_value }}" {% if category_value == ticket.job_category %}selected{% endif %}>
+                                {{ category_label }}
+                            </option>
+                        {% endfor %}
+                    </select>
+                </div>
+                <div class="mb-2">
+                    <label for="job_description" class="form-label">Job Description</label>
+                    <textarea class="form-control" id="job_description" name="job_description" rows="4"
+                        required>{{ticket.job_description}}</textarea>
+                </div>
+                <div class="mb-2">
+                    <label for="location" class="form-label">Location</label>
+                    <input type="text" class="form-control" id="location" name="location" value="{{ ticket.location }}"
+                        required>
+                </div>
+                <div class="mb-2">
+                    <label for="priority" class="form-label">Priority</label>
+                    <select class="form-select" id="priority" name="priority" required>
+                        <option value="">Select Priority</option>
+                        {% for priority_value, priority_label in PRIORITY %}
+                            <option value="{{ priority_value }}" {% if priority_value == ticket.priority %}selected{% endif %}>
+                                {{ priority_label }}
+                            </option>
+                        {% endfor %}
+                    </select>
+                </div>
                 <div class="row">
                     <div class="col-md-6 d-flex justify-content-center">
                         <button type="submit" class="btn btn-primary my-3" style="background-color: #00323c">Update Ticket</button>

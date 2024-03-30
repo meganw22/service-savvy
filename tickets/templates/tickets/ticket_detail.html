@@ -87,7 +87,6 @@
                 <form id="commentForm" method="post" >
                     {{ comment_form | crispy }}
                     {% csrf_token %}
-                    <!-- <textarea name="body" rows="4" cols="50" class=""></textarea><br> -->
                     <button type="submit" class="btn btn-primary" style="background-color: #00856f">Submit
                         Comment</button>
                 </form>
