@@ -28,13 +28,13 @@ class TicketListView(LoginRequiredMixin, ListView):
         # Sort all user tickets
         sort_by = self.request.GET.get('sort_by', 'priority_high')
         if sort_by == 'priority_high':
-            queryset = queryset.order_by('priority')
+            queryset = queryset.order_by('priority', 'created_on')
         elif sort_by == 'priority_low':
-            queryset = queryset.order_by('-priority')
+            queryset = queryset.order_by('-priority', 'created_on')
         elif sort_by == 'created_newest':
-            queryset = queryset.order_by('-created_on')
+            queryset = queryset.order_by('-created_on', 'priority')
         elif sort_by == 'created_oldest':
-            queryset = queryset.order_by('created_on')
+            queryset = queryset.order_by('created_on', 'priority')
 
         return queryset
 
