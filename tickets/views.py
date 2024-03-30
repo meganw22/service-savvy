@@ -147,10 +147,12 @@ def complete_ticket(request, ticket_slug):
         ticket.is_complete = False
         ticket.completed_by = None
         ticket.completed_at = None
+        messages.success(request, "Ticket marked as 'Incomplete'")
     else:
         ticket.is_complete = True
         ticket.completed_by = request.user
         ticket.completed_at = now()
+        messages.success(request, "Ticket marked as 'Complete'")
     ticket.save()
 
     return redirect('ticket_detail', slug=ticket.slug)

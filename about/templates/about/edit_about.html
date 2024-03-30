@@ -13,21 +13,21 @@
         <div class="row mt-3">
             <div class="col-md-6">
                 <label for="full_name" class="form-label">Full Name</label>
-                <input type="text" class="form-control" id="full_name" name="full_name" value="{{ about.full_name }}">
+                <input type="text" class="form-control" id="full_name" name="full_name" value="{{ about.full_name }}" required>
             </div>
             <div class="col-md-6">
                 <label for="job_title" class="form-label">Job Title</label>
-                <input type="text" class="form-control" id="job_title" name="job_title" value="{{ about.job_title }}">
+                <input type="text" class="form-control" id="job_title" name="job_title" value="{{ about.job_title }}" required>
             </div>
         </div>
         <div class="row mt-3">
             <div class="col-md-6">
                 <label for="email" class="form-label">Email</label>
-                <input type="email" class="form-control" id="email" name="email" value="{{ about.email }}">
+                <input type="email" class="form-control" id="email" name="email" value="{{ about.email }}" required>
             </div>
             <div class="col-md-6">
-                <label for="tel" class="form-label">Telephone</label>
-                <input type="tel" class="form-control" id="tel" name="tel" value="{{ about.tel }}">
+                <label for="tel" class="form-label">Phone</label>
+                <input type="tel" class="form-control" id="tel" name="tel" value="{{ about.tel }}" required>
             </div>
         </div>
         <div class="row mt-3">
