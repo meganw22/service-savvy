@@ -1,4 +1,4 @@
-from django.shortcuts import get_object_or_404, redirect, reverse
+from django.shortcuts import get_object_or_404, redirect, reverse, render
 from django.http import JsonResponse, HttpResponseRedirect
 from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView
 from django.template.loader import render_to_string
@@ -62,6 +62,13 @@ class TicketDetailView(DetailView):
         context['comment_form'] = CommentForm()
         return context
 
+    def post(self, request, *args, **kwargs):
+        ticket = self.get_object()
+        body = request.POST.get('body')
+        if body:
+            comment = Comment.objects.create(ticket=ticket, username=request.user, body=body)
+            comment.save()
+        return redirect('ticket_detail', slug=ticket.slug)
 
 # Create ticket View
 class CreateTicketView(CreateView):

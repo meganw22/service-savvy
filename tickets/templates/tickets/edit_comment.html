@@ -1,0 +1,29 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block content %}
+<!--Edit Comment-->
+<div class="container">
+    <div class="row mt-5">
+        <div class="col-md-6">
+            <h2 class="mb-2">Edit Comment</h2>
+            <form method="post">
+                {% csrf_token %}
+                {{ form.as_p }}
+                <button type="submit">Save Changes</button>
+            </form>
+        
+            <form method="post" action="#">
+                {% csrf_token %}
+                <input type="hidden" name="comment_id" value="{{ comment.id }}">
+            </form>
+                <div class="col-md-6 d-flex justify-content-center">
+                    <a href="{% url 'tickets' %}" class="btn btn-secondary my-3">Cancel</a>
+                </div>
+            </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+{% endblock content %}
