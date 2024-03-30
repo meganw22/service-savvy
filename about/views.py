@@ -29,5 +29,5 @@ class EditAboutView(generic.UpdateView):
     success_url = reverse_lazy('about')
 
     def form_valid(self, form):
-        # messages.success(self.request, 'Changes saved successfully!')
+        messages.success(self.request, 'Changes saved successfully!')
         return super().form_valid(form)

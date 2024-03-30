@@ -16,4 +16,4 @@ class About(models.Model):
     def save(self, *args, **kwargs):
         if not self.pk and not self.member_since:
             self.member_since = self.user.date_joined
-        super(),save(*args, **kwargs)
+        super().save(*args, **kwargs)

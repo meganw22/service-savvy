@@ -71,5 +71,4 @@ class Comment(models.Model):
 # Archive Model
 class Archive(models.Model):
     ticket = models.ForeignKey(Ticket, on_delete=models.CASCADE)
-    archived_at = models.DateTimeField(auto_now_add=True)
-
+    

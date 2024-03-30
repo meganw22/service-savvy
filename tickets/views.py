@@ -2,7 +2,7 @@ from django.shortcuts import get_object_or_404, redirect, reverse, render
 from django.http import JsonResponse, HttpResponseRedirect
 from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView
 from django.template.loader import render_to_string
-from .models import Ticket, JOB_CATEGORY, PRIORITY, Comment
+from .models import Ticket, JOB_CATEGORY, PRIORITY, Comment, Archive
 from .forms import CommentForm
 from django.urls import reverse_lazy
 from django.contrib.auth.mixins import LoginRequiredMixin
@@ -28,13 +28,17 @@ class TicketListView(LoginRequiredMixin, ListView):
         # Sort all user tickets
         sort_by = self.request.GET.get('sort_by', 'priority_high')
         if sort_by == 'priority_high':
-            queryset = queryset.order_by('priority', 'created_on')
+            queryset = queryset.filter(is_complete=False).order_by('priority', 'created_on')
         elif sort_by == 'priority_low':
-            queryset = queryset.order_by('-priority', 'created_on')
+            queryset = queryset.filter(is_complete=False).order_by('-priority', 'created_on')
         elif sort_by == 'created_newest':
-            queryset = queryset.order_by('-created_on', 'priority')
+            queryset = queryset.filter(is_complete=False).order_by('-created_on', 'priority')
         elif sort_by == 'created_oldest':
-            queryset = queryset.order_by('created_on', 'priority')
+            queryset = queryset.filter(is_complete=False).order_by('created_on', 'priority')
+        elif sort_by == 'completed':
+            queryset = queryset.filter(is_complete=True).order_by('is_complete', 'created_on')
+        else:
+            queryset = queryset.order_by('priority', 'created_on')
 
         return queryset
 
@@ -122,9 +126,7 @@ class TicketDeleteView(DeleteView):
     success_url = reverse_lazy('tickets')
     template_name = 'tickets/delete_ticket.html'
 
-
 # Delete User Comments
-
 @login_required
 def delete_comment(request, comment_id):
     comment = get_object_or_404(Comment, id=comment_id)
@@ -135,3 +137,18 @@ def delete_comment(request, comment_id):
     else:
         messages.error(request, 'You do not have permission to delete this comment.')
     return redirect('ticket_detail', slug=ticket_slug)
+
+# Ticket Completed Section
+def complete_ticket(request, ticket_slug):
+    ticket = get_object_or_404(Ticket, slug=ticket_slug)
+
+    # Toggle the complete status of the ticket
+    if ticket.is_complete:
+        ticket.is_complete = False
+        ticket.completed_by = None
+    else:
+        ticket.is_complete = True
+        ticket.completed_by = request.user
+    ticket.save()
+
+    return redirect('ticket_detail', slug=ticket.slug)
