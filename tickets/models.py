@@ -5,7 +5,7 @@ from django.contrib.auth.models import User
 
 JOB_CATEGORY = (
     (0, "Plumbing"),
-    (1, "Lighting"),
+    (1, "Electrical"),
     (2, "Heating"),
     (3, "Cleaning"),
     (4, "Vending Services"),

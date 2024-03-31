@@ -30,6 +30,7 @@
                 <div class="col-md-8">{{ ticket.created_on }}</div>
             </div>
             {% if user.is_authenticated %}
+            {% if ticket.username == user %}
             <form method="post" action="{% url 'complete_ticket' ticket.slug %}">
                 {% csrf_token %}
                 <div class="row mb-3">
@@ -40,6 +41,7 @@
                     </div>
                 </div>
             </form>
+            {% endif %}
             {% endif %}
             {% if ticket.is_complete %}
             <div class="row mb-3">
