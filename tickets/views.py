@@ -1,12 +1,11 @@
 from django.shortcuts import get_object_or_404, redirect, reverse, render
-from django.http import JsonResponse, HttpResponseRedirect
+# from django.http import JsonResponse, HttpResponseRedirect
 from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView
-from django.template.loader import render_to_string
-from .models import Ticket, JOB_CATEGORY, PRIORITY, Comment, Archive
+# from django.template.loader import render_to_string
+from .models import Ticket, JOB_CATEGORY, PRIORITY, Comment
 from .forms import CommentForm
 from django.urls import reverse_lazy
 from django.contrib.auth.mixins import LoginRequiredMixin
-from django.contrib.auth.decorators import login_required
 from django.contrib import messages
 from django.utils.timezone import now
 
@@ -127,7 +126,6 @@ class TicketDeleteView(DeleteView):
     template_name = 'tickets/delete_ticket.html'
 
 # Delete User Comments
-@login_required
 def delete_comment(request, comment_id):
     comment = get_object_or_404(Comment, id=comment_id)
     ticket_slug = comment.ticket.slug

@@ -9,16 +9,14 @@
 
 <div class="container">
     <div class="row">
-        <div class="col-md-8 mt-3 offset-md-2">
+        <div class="col-md-8 m-3 offset-md-2">
             <h1>{% trans "Log In" %}</h1>
-
-            <p>{% blocktrans %}Welcome back to the Service Savvy Portal. If
-                you have not created an account yet, Register <a class="link" href="{{ signup_url }}">here</a>
+            <p>{% blocktrans %}Welcome back to the Service Savvy Portal. 
                 .{% endblocktrans %}</p>
         </div>
     </div>
     <div class="row">
-        <div class="col-md-8 mt-3 offset-md-2">
+        <div class="col-md-8 offset-md-2">
             <form class="login" method="POST" action="{% url 'account_login' %}">
                 {% csrf_token %}
                 {{ form.as_p }}
@@ -28,6 +26,8 @@
                 <button class="btn btn-primary" style="background-color: #00856f" type="submit">{% trans "Log In" %}</button>
             </form>
         </div>
+        <p class="m-3">{% blocktrans %}If you have not created an account yet, Register <a class="link" href="{{ signup_url }}">here</a>
+            .{% endblocktrans %}</p>
     </div>
 </div>
 {% endblock %}

@@ -29,16 +29,18 @@
                 <div class="col-md-4 fw-bold">Created On:</div>
                 <div class="col-md-8">{{ ticket.created_on }}</div>
             </div>
+            {% if user.is_authenticated %}
             <form method="post" action="{% url 'complete_ticket' ticket.slug %}">
                 {% csrf_token %}
                 <div class="row mb-3">
                     <div class="col-md-4 fw-bold">Ticket Complete:</div>
-                    <div class="col-md-8">
+                    <div class="col-md-8 mt-2">
                         <input type="checkbox" id="is_complete" name="is_complete" {% if ticket.is_complete %}checked{% endif %}>
                         <button type="submit" class=" mx-4 btn-sm btn-secondary">Apply</button>
                     </div>
                 </div>
             </form>
+            {% endif %}
             {% if ticket.is_complete %}
             <div class="row mb-3">
                 <div class="col-md-4 fw-bold">Completed By:</div>

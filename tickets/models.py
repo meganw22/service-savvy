@@ -25,8 +25,7 @@ class Ticket(models.Model):
     title = models.CharField(max_length=200, unique=True)
     slug = models.SlugField(null=True, unique=True)
     username = models.ForeignKey(
-        User, on_delete=models.CASCADE, related_name="user_tickets"
-    )
+        User, on_delete=models.CASCADE, related_name="user_tickets")
     job_category = models.IntegerField(choices=JOB_CATEGORY, default=0)
     job_description = models.TextField(max_length=400, blank=False)
     created_on = models.DateTimeField(auto_now_add=True)
@@ -34,8 +33,7 @@ class Ticket(models.Model):
     priority = models.IntegerField(choices=PRIORITY, default=0)
     is_complete = models.BooleanField(default=False)
     completed_by = models.ForeignKey(
-        User, on_delete=models.SET_NULL, blank=True, null=True, related_name="completed_tickets"
-    )
+        User, on_delete=models.SET_NULL, blank=True, null=True, related_name="completed_tickets")
     completed_at = models.DateTimeField(null=True, blank=True, auto_now_add=True)
     updated_on = models.DateTimeField(auto_now=True)
 
@@ -55,11 +53,9 @@ class Ticket(models.Model):
 # Comment Model
 class Comment(models.Model):
     ticket = models.ForeignKey(
-        Ticket, on_delete=models.CASCADE, related_name="comments"
-    )
+        Ticket, on_delete=models.CASCADE, related_name="comments")
     username = models.ForeignKey(
-        User, on_delete=models.CASCADE, related_name="commenter"
-    )
+        User, on_delete=models.CASCADE, related_name="commenter")
     body = models.TextField()
     created_on = models.DateTimeField(auto_now_add=True)
 
@@ -68,7 +64,6 @@ class Comment(models.Model):
     def __str__(self):
         return f"{self.body} by {self.username}"
 
-# Archive Model
+# Archive Model - not utilised
 class Archive(models.Model):
     ticket = models.ForeignKey(Ticket, on_delete=models.CASCADE)
-    
