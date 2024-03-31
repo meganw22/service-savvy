@@ -1,4 +1,6 @@
 # Service Savvy
+![image](https://github.com/meganw22/service-savvy/assets/141934888/947d872d-e299-46ed-a61f-ec50414cb99a)
+
 
 ## Introduction
 
@@ -41,9 +43,6 @@ Authenticated view of nav bar:
 ### Footer
 the footer is consistent throughout the webpages and is responsive:
 ![image](https://github.com/meganw22/service-savvy/assets/141934888/4a5a2a15-7855-4a56-afef-ac911d30ee42)
-
-### Colour scheme
-![image](https://github.com/meganw22/service-savvy/assets/141934888/49b55da4-0a82-4fa2-9490-45f420ab4f86)
 
 ## Homepage
 The homepage displays a simple structure, welcoming users to the portal. It contains hyperlinks to prompt the user into creating or loggin in to an account before they are able to view the rest of the website content. 
@@ -97,7 +96,7 @@ Fields include:
 ![image](https://github.com/meganw22/service-savvy/assets/141934888/273e7499-e32f-43de-be83-2a742715ef8b)
 
 ### Ticket Details View
-the Ticket detail view is displayed when a user opens a created ticket. It provides the details of the ticket and has some targeted authentication rules that only the user raising the ticket can see.
+The ticket detail view is displayed when a user opens a created ticket. It provides the details of the ticket and has some targeted authentication rules that only the user raising the ticket can see.
 
 ![image](https://github.com/meganw22/service-savvy/assets/141934888/2ce2c561-9503-41d7-b80b-346718ae1251)
 
@@ -106,7 +105,7 @@ If a user is not the creator of a ticket they cannot edit, delete or complete th
 ![image](https://github.com/meganw22/service-savvy/assets/141934888/fc063f2f-0a07-4ec1-b138-6673a1cf8836)
 
 ### Update Tickets
-Only the authenticated user who created the ticket, can update the ticket. For all other users, the update button not displayed or avaliable.
+Only the authenticated user who created the ticket, can update the ticket. For all other users, the update button is not displayed or avaliable.
 The update view will display the pre-populated values of the current ticket and will allow the user to make adjustments and save changes. 
 When updates are saved, Users can see the new 'Last Updated On' time stamp differ from the 'Created on' timestamp. 
 
@@ -123,7 +122,7 @@ Users can only delete their own tickets and cannot delete other users tickets.
 
 ### Delete
 Only the authenticated user who created the ticket, can delete the ticket. For all other users, the delete button is not displayed or avaliable.
-the delete ticket process is a 2-step verification where the user is directed to a new page to confirm ticket requires deleting before they are re-directed back to the tickets list page.
+The delete ticket process is a 2-step verification where the user is directed to a new page to confirm ticket requires deleting before they are re-directed back to the tickets list page.
 ![image](https://github.com/meganw22/service-savvy/assets/141934888/bb836727-84d9-4f16-843d-ee8d0ad8a69a)
 
 ### Profile details 
@@ -131,19 +130,94 @@ When a user is authenticated they can navigate to their about page to populate a
 ![image](https://github.com/meganw22/service-savvy/assets/141934888/57412db8-effc-4cba-bc64-ee0c1d322b53)
 
 
-## Future Implementation
-### Utilise the Archive model
+# Future Implementation
+## Utilise the Archive model
 Creating an Archive model can be benefical for data organisation, performance and user experience. I have implemented a form of separation of completed tickets from incomplete tickets but and archive feature can keep the database more organised and easier to manage. For performance purposes, a separate database to hold the completed data would benefit the performance greatly by reducing the size of the active ticket database. Finally, user experience will improve as the new model will de-clutter the current list and make it easier for users to find archived and historical tickets.
 
-### Creation of user groups
+## Creation of user groups
 User groups provide access control and allow certain users permission and restrictions for others. Users can be assigned groups and groups can be assigned permissions this can simplify administration when the portal grows in popularity and provides enhanced security. This way, unauthenticated user could be able to see tickets, but still be restricted on user details on tickets and comments for security purposes. As the portal develops, user groups can expand to more than Requestors and Fixers and the groups could evolve and be split up, for example, cleaning jobs are only shown to users in the cleaning user group. This idea has big potential and can offer huge flexibilty to the site.
 
-## Testing
-### new page
+# Testing
+## Manual Testing
+I have conducted an extensive list of manual testing, It includes all buttons and pages to ensure the function as desired and without errors.
 
-## deployment
+### All pages views - no user logged in
+| Action taken                     | Expected result                             | Actual result                              | Outcome |
+|---------------------------------|---------------------------------------------|--------------------------------------------|---------|
+| Get started here! button clicked| User is directed to login page              | Action matched expected result            | Pass    |
+| Ticket option selected in nav bar | User is directed to login page             | Action matched expected result            | Pass    |
+| Profile selected in navbar       | Shows, register and login options           | Action matched expected result            | Pass    |
+| Register selected                | Directs user to register for a new account | Action matched expected result            | Pass    |
+| Login Selected                   | Directs user to sign in to their account   | Action matched expected result            | Pass    |
+| New user account created         | Account created with success notification | Action matched expected result            | Pass    |
+| Existing user logged in         | Log on successful, success message shown   | Action matched expected result            | Pass    |
+
+### Home and About Views - user logged in
+
+| Action taken                              | Expected result                           | Actual result                            | Outcome |
+|-------------------------------------------|-------------------------------------------|------------------------------------------|---------|
+| 'Create or Amend tickets here' button selected | Directed to List of tickets page      | Action matched expected result          | Pass    |
+| Tickets selected in navbar                | Directed to List of tickets page         | Action matched expected result          | Pass    |
+| Profile selected in navbar                | Shows About and Logout options           | Action matched expected result          | Pass    |
+| About option selected                     | User directed to About View page         | Action matched expected result          | Pass    |
+| About Edit button selected                | About Edit view shown                     | Action matched expected result          | Pass    |
+| About Edit save changes incomplete form   | 'Fill in empty box' alert shows, no save | Action matched expected result          | Pass    |
+| About Edit save changes complete form     | Save completed with success alert        | Action matched expected result          | Pass    |
+
+### Ticket list Views - user logged in
+
+| Action taken                              | Expected result                           | Actual result                            | Outcome |
+|-------------------------------------------|-------------------------------------------|------------------------------------------|---------|
+| Sort by High priority selected            | Tickets shown from high to low priority, with secondary filter of oldest ticket created first | Action matched expected result | Pass |
+| Sort by Low priority selected             | Tickets shown from low to high priority, with secondary filter of oldest ticket created first | Action matched expected result | Pass |
+| Sort by newest created                    | Tickets shown with newest tickets first in any priority | Action matched expected result       | Pass |
+| Sort by oldest created                    | Tickets shown with oldest tickets first in any priority | Action matched expected result       | Pass |
+| Sort by completed tickets                 | Only tickets completed are shown         | Action matched expected result          | Pass |
+| Show only my tickets toggle is selected   | Only tickets raised by user logged in are shown | Action matched expected result     | Pass |
+
+### Create/Update/Delete Ticket View - user logged in
+
+| Action taken                              | Expected result                           | Actual result                            | Outcome |
+|-------------------------------------------|-------------------------------------------|------------------------------------------|---------|
+| Create new ticket button selected         | Opens a Create new ticket view            | Action matched expected result          | Pass    |
+| Create ticket successfully                | Directed to ticket list view after ticket submitted, with success message | Action matched expected result | Pass |
+| Create duplicate ticket                   | Ticket not submitted and error message shown | Action matched expected result       | Pass |
+| Create empty ticket                       | 'Please fill in this field' error message shown for all boxes | Action matched expected result  | Pass |
+| Update Ticket Selected                    | Update Ticket view, pre-populated with existing ticket data for editing | Action matched expected result | Pass |
+| Update other users tickets                | Update option not visible or available for other user tickets | Action matched expected result  | Pass |
+| Update Change details selected           | Ticket detail view, with success message, updated on field updated with time/date | Action matched expected result | Pass |
+| Delete ticket selected                    | Directs to Delete Ticket View, with confirmation page | Action matched expected result         | Pass |
+| Confirm ticket delete                     | Redirected to Ticket List View, success message shown. Ticket not found in ticket list. | Action matched expected result | Pass |
+
+### Comments - user logged in
+
+| Action taken                              | Expected result                           | Actual result                            | Outcome |
+|-------------------------------------------|-------------------------------------------|------------------------------------------|---------|
+| Comment added to ticket                   | Comment added and success message shown, user and time/date of post shown | Action matched expected result | Pass |
+| Delete comment selected                   | Alert to confirm comment delete is shown  | Action matched expected result          | Pass    |
+| Delete comment confirmation               | Ticket detail view is shown and success message. Deleted comment not shown on ticket | Action matched expected result | Pass |
+
+### Ticket Completion - User logged in
+
+| Action taken                              | Expected result                           | Actual result                            | Outcome |
+|-------------------------------------------|-------------------------------------------|------------------------------------------|---------|
+| Ticket complete tickbox selected          | Checkbox changes state                    | Action matched expected result          | Pass    |
+| Ticket Complete Apply button              | Ticket completed, success message shown. Completed by field populated. Complete time and date populated. | Action matched expected result | Pass |
+
+
+## Bugs
+
+## Deployment
+My project is deployed through Heroku can be found [here](https://project-4-savvy-cfe8d435fa81.herokuapp.com/)
+1. To set up the code to deploy, I used my existing account with Heroku and created a new Heroku App
+2. Set deployment method of Github and connected my new App to my github profile.
+3. Within my project code, I created a Procfile in the root directory which specifies the commands executed when the app starts up.
+4. Added heroku to my list of 'Allowed Hosts' in settings.py
+5. In heroku, I configured the secret key and database url to match my project.
+6. Manually deployed my main branch and opened the app through Heroku successfully.  
 
 ## Credits
 ### Content
+
 ### Media
 
