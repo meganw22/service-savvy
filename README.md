@@ -20,22 +20,31 @@ Service savvy is a centralised platform for communication between users and main
 ## Entity Relationship Diagrams (ERD)
 | Entity         | Attributes                 |
 |----------------|----------------------------|
-| User           | - username: CharField(50)  | 
-|                | - user_type: IntegerField  |
-|                |                            |
-| Ticket         | - title: CharField(50)     | 
-|                | - slug: SlugField          |
-|                | - username: ForeignKey(User) | 
-|                | - Job Category: IntegerField |
-|                | - Job Description: CharField |
-|                | - Created_on: DateTimeField |
-|                | - Location: CharField      |
-|                | - Priority: IntegerField   |
-|                | - is_complete: BooleanField |
-|                | - completed_by: ForeignKey(User) |
-|                | - completed_at: DateTimeField |
-|                | - update_on: DateTimeField |
-
+| User           | username: CharField     | 
+|                | user_type: IntegerField  |
+| Ticket         | title: CharField         | 
+|                | slug: SlugField          |
+|                | username: ForeignKey(User) | 
+|                | Job Category: IntegerField |
+|                | Job Description: CharField |
+|                | Created_on: DateTimeField |
+|                | Location: CharField      |
+|                | Priority: IntegerField   |
+|                | is_complete: BooleanField |
+|                | completed_by: ForeignKey(User) |
+|                | completed_at: DateTimeField |
+|                | update_on: DateTimeField |
+| About          | User: OneToOneField(User) |
+|                | title: CharField        | 
+|                | update_on: DateTimeField |
+|                | job_title: TextField |
+|                | email: CharField |
+|                | tel: CharField |
+|                | memeber_since: DateTimeField |
+| Comment        | ticket: ForeignKey(Ticket) |
+|                | username: ForeignKey(User) | 
+|                | body: TextField |
+|                | Created_on: DateTimeField |
 
 
  
