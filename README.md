@@ -264,11 +264,11 @@ My project is deployed through Heroku can be found [here](https://project-4-savv
 6. Manually deployed my main branch and opened the app through Heroku successfully.  
 
 ## Credits
-- Bootstrap for the CSS framework
-- Django for the web framework
-- ElephantSQL for the database management
+- [Bootstrap](https://getbootstrap.com/) for the CSS framework
+- [Django](https://www.djangoproject.com/) for the web framework
+- [ElephantSQL](https://www.elephantsql.com/) for the database management
 - Homepage image is from [Pexels](https://www.pexels.com/)
 - Wireframes are from [Draw.io](https://app.diagrams.net/)
-- fontAwesome for icons
-- 
-
+- [fontAwesome](https://fontawesome.com/kits) for icons
+- Code institutes project walkthrough, 'I think Therefore I Blog'.
+- Many pages and videos from Stack Overflow, W3Schools, youTube, chatGPT and other sites
