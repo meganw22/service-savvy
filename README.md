@@ -15,7 +15,39 @@ Service savvy is a centralised platform for communication between users and main
 - As a user, I want to be able to sort the tickets based on different criteria, such as date, urgency, or status.
 - As a user, I want to be able to leave comments on tickets for feedback and follow up purposes.
 - As a user, I want to be able to close tickets and mark them as completed for better t tracking and performance purposes.
-- As an admin, I want only authenticated users to have access to ticket CRUD functionality. 
+- As an admin, I want only authenticated users to have access to ticket CRUD functionality.
+
+## Entity Relationship Diagrams (ERD)
+| Entity         | Attributes                 |
+|----------------|----------------------------|
+| User           | username: CharField     | 
+|                | user_type: IntegerField  |
+| Ticket         | title: CharField         | 
+|                | slug: SlugField          |
+|                | username: ForeignKey(User) | 
+|                | Job Category: IntegerField |
+|                | Job Description: CharField |
+|                | Created_on: DateTimeField |
+|                | Location: CharField      |
+|                | Priority: IntegerField   |
+|                | is_complete: BooleanField |
+|                | completed_by: ForeignKey(User) |
+|                | completed_at: DateTimeField |
+|                | update_on: DateTimeField |
+| About          | User: OneToOneField(User) |
+|                | title: CharField        | 
+|                | update_on: DateTimeField |
+|                | job_title: TextField |
+|                | email: CharField |
+|                | tel: CharField |
+|                | memeber_since: DateTimeField |
+| Comment        | ticket: ForeignKey(Ticket) |
+|                | username: ForeignKey(User) | 
+|                | body: TextField |
+|                | Created_on: DateTimeField |
+
+
+ 
 
 ## Wireframes
 
@@ -30,11 +62,11 @@ Service savvy is a centralised platform for communication between users and main
 ![update ticket drawio](https://github.com/meganw22/service-savvy/assets/141934888/c71b40ff-9ce0-4e60-8e32-9a46bb2857ce)
 
 ## Features
-Service savvy is fully responsive and easy for new users to navigate. It required users to be authenticated when viewing and amending details but the homepage is avaliable for all users to view.
+Service savvy is fully responsive and easy for new users to navigate. It required users to be authenticated when viewing and amending details but the homepage is available for all users to view.
 
 ### Nav Bar
 The nav bar includes the logo, and nav links for Home, Tickets and User Profile page.
-Unathenticaed view of nav bar:
+Unauthenticated view of nav bar:
 ![image](https://github.com/meganw22/service-savvy/assets/141934888/fd551651-c953-41d1-88df-97f0dc9a43f2)
 
 Authenticated view of nav bar:
@@ -45,7 +77,7 @@ the footer is consistent throughout the webpages and is responsive:
 ![image](https://github.com/meganw22/service-savvy/assets/141934888/4a5a2a15-7855-4a56-afef-ac911d30ee42)
 
 ## Homepage
-The homepage displays a simple structure, welcoming users to the portal. It contains hyperlinks to prompt the user into creating or loggin in to an account before they are able to view the rest of the website content. 
+The homepage displays a simple structure, welcoming users to the portal. It contains hyperlinks to prompt the user into creating or logging in to an account before they are able to view the rest of the website content. 
 Further down the homepage, there is a section containing emergency information for a user to contact. It is displayed in obvious and large formatting.
 
 Unauthenticated display
@@ -57,7 +89,7 @@ Authenticated display
 ![image](https://github.com/meganw22/service-savvy/assets/141934888/ab97e897-4e22-4780-9455-0a22a54bb5fc)
 
 ### Register
-The user is directed to registion form which is provided by Django. It allows a user to create an account with prompts and suggestion for a secure password. 
+The user is directed to registration form which is provided by Django. It allows a user to create an account with prompts and suggestion for a secure password. 
 
 ![image](https://github.com/meganw22/service-savvy/assets/141934888/4a21c23d-0bf5-4ba1-b283-3aaafe78df4a)
 
@@ -72,14 +104,14 @@ The sign out view is a 2 step process to confirm the user wants to log out. The 
 ![image](https://github.com/meganw22/service-savvy/assets/141934888/bde942f0-d615-476c-9091-2e08b55cad55)
 
 ## Tickets 
-Within the maintenance portal, a ticket raised means a problem has occured. The user creating the ticket will fill in the details and submit it, wsending it to the ticket list view. All authenticated user can see all tickets. 
+Within the maintenance portal, a ticket raised means a problem has occurred. The user creating the ticket will fill in the details and submit it, sending it to the ticket list view. All authenticated user can see all tickets. 
 
 ### List
 The ticket list, shows all created tickets raised by users. The tickets are sorted, by default, in order of highest priority first with a secondary filter, oldest created. This is useful for maintenance members who want a quick view of which tickets are the higher priority tickets and what needs addressing first.
 
 ![image](https://github.com/meganw22/service-savvy/assets/141934888/8660f842-22b0-4301-8972-b39f99984925)
 
-The sort filter dropdown has multiple options allowing flexible view of tickets. The tickets listed are all incompleted tickets and are awaiting fixing. All completed tickets are seperated through another filter called 'Completed'
+The sort filter dropdown has multiple options allowing flexible view of tickets. The tickets listed are all incomplete tickets and are awaiting fixing. All completed tickets are separated through another filter called 'Completed'
 Users also have the option of displaying only their own tickets which is very useful to navigate in the future when the website is increasingly used and there could be 100's of tickets raised.
 
 ![image](https://github.com/meganw22/service-savvy/assets/141934888/bf4b065f-64a3-4bfd-a6f6-2a25559b2177)
@@ -105,7 +137,7 @@ If a user is not the creator of a ticket they cannot edit, delete or complete th
 ![image](https://github.com/meganw22/service-savvy/assets/141934888/fc063f2f-0a07-4ec1-b138-6673a1cf8836)
 
 ### Update Tickets
-Only the authenticated user who created the ticket, can update the ticket. For all other users, the update button is not displayed or avaliable.
+Only the authenticated user who created the ticket, can update the ticket. For all other users, the update button is not displayed or available.
 The update view will display the pre-populated values of the current ticket and will allow the user to make adjustments and save changes. 
 When updates are saved, Users can see the new 'Last Updated On' time stamp differ from the 'Created on' timestamp. 
 
@@ -121,7 +153,7 @@ Users can only delete their own tickets and cannot delete other users tickets.
 ![image](https://github.com/meganw22/service-savvy/assets/141934888/d8c07fc3-34fc-4ef3-9056-24713d613111)
 
 ### Delete
-Only the authenticated user who created the ticket, can delete the ticket. For all other users, the delete button is not displayed or avaliable.
+Only the authenticated user who created the ticket, can delete the ticket. For all other users, the delete button is not displayed or available.
 The delete ticket process is a 2-step verification where the user is directed to a new page to confirm ticket requires deleting before they are re-directed back to the tickets list page.
 ![image](https://github.com/meganw22/service-savvy/assets/141934888/bb836727-84d9-4f16-843d-ee8d0ad8a69a)
 
@@ -132,10 +164,10 @@ When a user is authenticated they can navigate to their about page to populate a
 
 # Future Implementation
 ## Utilise the Archive model
-Creating an Archive model can be benefical for data organisation, performance and user experience. I have implemented a form of separation of completed tickets from incomplete tickets but and archive feature can keep the database more organised and easier to manage. For performance purposes, a separate database to hold the completed data would benefit the performance greatly by reducing the size of the active ticket database. Finally, user experience will improve as the new model will de-clutter the current list and make it easier for users to find archived and historical tickets.
+Creating an Archive model can be beneficial for data organisation, performance and user experience. I have implemented a form of separation of completed tickets from incomplete tickets but and archive feature can keep the database more organised and easier to manage. For performance purposes, a separate database to hold the completed data would benefit the performance greatly by reducing the size of the active ticket database. Finally, user experience will improve as the new model will de-clutter the current list and make it easier for users to find archived and historical tickets.
 
 ## Creation of user groups
-User groups provide access control and allow certain users permission and restrictions for others. Users can be assigned groups and groups can be assigned permissions this can simplify administration when the portal grows in popularity and provides enhanced security. This way, unauthenticated user could be able to see tickets, but still be restricted on user details on tickets and comments for security purposes. As the portal develops, user groups can expand to more than Requestors and Fixers and the groups could evolve and be split up, for example, cleaning jobs are only shown to users in the cleaning user group. This idea has big potential and can offer huge flexibilty to the site.
+User groups provide access control and allow certain users permission and restrictions for others. Users can be assigned groups and groups can be assigned permissions this can simplify administration when the portal grows in popularity and provides enhanced security. This way, unauthenticated user could be able to see tickets, but still be restricted on user details on tickets and comments for security purposes. As the portal develops, user groups can expand to more than Requestors and Fixers and the groups could evolve and be split up, for example, cleaning jobs are only shown to users in the cleaning user group. This idea has big potential and can offer huge flexibility to the site.
 
 # Testing
 ## Manual Testing
@@ -201,23 +233,42 @@ I have conducted an extensive list of manual testing, It includes all buttons an
 
 | Action taken                              | Expected result                           | Actual result                            | Outcome |
 |-------------------------------------------|-------------------------------------------|------------------------------------------|---------|
-| Ticket complete tickbox selected          | Checkbox changes state                    | Action matched expected result          | Pass    |
+| Ticket complete checkbox selected          | Checkbox changes state                    | Action matched expected result          | Pass    |
 | Ticket Complete Apply button              | Ticket completed, success message shown. Completed by field populated. Complete time and date populated. | Action matched expected result | Pass |
 
+## Validator testing
+##### HTML & CSS
+HTML and CSS files successfully run through [Offical W3C Validator](https://validator.w3.org/nu/?doc=https%3A%2F%2Fproject-4-savvy-cfe8d435fa81.herokuapp.com%2F) with no errors found.
+
+##### Python Linter
+No errors found, [CI Python linter](https://pep8ci.herokuapp.com/#) used.
 
 ## Bugs
+### Non functional 2-step process
+Situation - Using a 2 step process with a checkbox and an Apply button to complete a ticket when in Ticket Detail View. Currently, Check box is ticked, apply button is pressed. Ticket marked as complete
+Issue - When the checkbox isn't touched, the apply button is pressed and the ticket unchecks and marked as incomplete successfully. This negates the need for dual confirmation is the apply button can perform both tasks.
+Resolved? - No, Incomplete and unknown fix at this time.
+
+### Update ticket no pre-populated content
+Situation - On pressing the Update ticket button, the view doesn't show the current data in the ticket, making it difficult to edit and causing the user to rewrite the whole ticket.
+Issue - The form is generated from the same form used for Create Ticket, the pre-populated data is never pulled through because it isn’t present to being with. 
+Resolved? - Yes, Create and Update ticket separated, and update ticket pre-populated content is now showing and is editable.
 
 ## Deployment
 My project is deployed through Heroku can be found [here](https://project-4-savvy-cfe8d435fa81.herokuapp.com/)
 1. To set up the code to deploy, I used my existing account with Heroku and created a new Heroku App
-2. Set deployment method of Github and connected my new App to my github profile.
+2. Set deployment method of GitHub and connected my new App to my GitHub profile.
 3. Within my project code, I created a Procfile in the root directory which specifies the commands executed when the app starts up.
-4. Added heroku to my list of 'Allowed Hosts' in settings.py
-5. In heroku, I configured the secret key and database url to match my project.
+4. Added Heroku to my list of 'Allowed Hosts' in settings.py
+5. In Heroku, I configured the secret key and database URL to match my project.
 6. Manually deployed my main branch and opened the app through Heroku successfully.  
 
 ## Credits
-### Content
-
-### Media
-
+- [Bootstrap](https://getbootstrap.com/) for the CSS framework
+- [Django](https://www.djangoproject.com/) for the web framework
+- [ElephantSQL](https://www.elephantsql.com/) for the database management
+- Homepage image is from [Pexels](https://www.pexels.com/)
+- Wireframes are from [Draw.io](https://app.diagrams.net/)
+- [fontAwesome](https://fontawesome.com/kits) for icons
+- Code institutes project walkthrough, 'I think Therefore I Blog'.
+- Many pages and videos from Stack Overflow, W3Schools, youTube, chatGPT and other sites
