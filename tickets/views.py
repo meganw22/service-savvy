@@ -1,7 +1,6 @@
 from django.shortcuts import get_object_or_404, redirect, reverse, render
-# from django.http import JsonResponse, HttpResponseRedirect
-from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView
-# from django.template.loader import render_to_string
+from django.views.generic import (
+    ListView, DetailView, CreateView, UpdateView, DeleteView)
 from .models import Ticket, JOB_CATEGORY, PRIORITY, Comment
 from .forms import CommentForm
 from django.urls import reverse_lazy
@@ -9,17 +8,18 @@ from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib import messages
 from django.utils.timezone import now
 
+
 # Ticket List View
 class TicketListView(LoginRequiredMixin, ListView):
     queryset = Ticket.objects.all()
     template_name = "tickets/tickets.html"
     paginate_by = 6
 
-    # Sort ticket list 
+    # Sort ticket list
     def get_queryset(self):
         queryset = super().get_queryset()
 
-        #Sort User tickets only
+        # Sort User tickets only
         show_own_tickets = self.request.GET.get('own_tickets', False)
         if show_own_tickets:
             queryset = queryset.filter(username=self.request.user)
@@ -27,15 +27,20 @@ class TicketListView(LoginRequiredMixin, ListView):
         # Sort all user tickets
         sort_by = self.request.GET.get('sort_by', 'priority_high')
         if sort_by == 'priority_high':
-            queryset = queryset.filter(is_complete=False).order_by('priority', 'created_on')
+            queryset = queryset.filter(is_complete=False).order_by(
+                'priority', 'created_on')
         elif sort_by == 'priority_low':
-            queryset = queryset.filter(is_complete=False).order_by('-priority', 'created_on')
+            queryset = queryset.filter(is_complete=False).order_by(
+                '-priority', 'created_on')
         elif sort_by == 'created_newest':
-            queryset = queryset.filter(is_complete=False).order_by('-created_on', 'priority')
+            queryset = queryset.filter(is_complete=False).order_by(
+                '-created_on', 'priority')
         elif sort_by == 'created_oldest':
-            queryset = queryset.filter(is_complete=False).order_by('created_on', 'priority')
+            queryset = queryset.filter(is_complete=False).order_by(
+                'created_on', 'priority')
         elif sort_by == 'completed':
-            queryset = queryset.filter(is_complete=True).order_by('-completed_at', 'created_on')
+            queryset = queryset.filter(is_complete=True).order_by(
+                '-completed_at', 'created_on')
         else:
             queryset = queryset.order_by('priority', 'created_on')
 
@@ -43,9 +48,12 @@ class TicketListView(LoginRequiredMixin, ListView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context['selected_sort_by'] = self.request.GET.get('sort_by', 'priority_high')
-        context['show_own_tickets'] = self.request.GET.get('own_tickets', False)
+        context['selected_sort_by'] = self.request.GET.get(
+            'sort_by', 'priority_high')
+        context['show_own_tickets'] = self.request.GET.get(
+            'own_tickets', False)
         return context
+
 
 # Ticket Detail View
 class TicketDetailView(DetailView):
@@ -69,16 +77,20 @@ class TicketDetailView(DetailView):
         ticket = self.get_object()
         body = request.POST.get('body')
         if body:
-            comment = Comment.objects.create(ticket=ticket, username=request.user, body=body)
+            comment = Comment.objects.create(
+                ticket=ticket, username=request.user, body=body)
             comment.save()
             messages.success(self.request, 'Comment created successfully')
         return redirect('ticket_detail', slug=ticket.slug)
+
 
 # Create ticket View
 class CreateTicketView(CreateView):
     model = Ticket
     template_name = 'tickets/create_ticket.html'
-    fields = ['title', 'job_category', 'job_description', 'location', 'priority' ]
+    fields = [
+        'title', 'job_category', 'job_description', 'location', 'priority'
+        ]
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
@@ -98,11 +110,14 @@ class CreateTicketView(CreateView):
     def get_success_url(self):
         return '/tickets/'
 
+
 # Update Ticket View
 class TicketUpdateView(UpdateView):
     model = Ticket
     template_name = 'tickets/update_ticket.html'
-    fields = ['title', 'job_category', 'job_description', 'location', 'priority' ]
+    fields = [
+        'title', 'job_category', 'job_description', 'location', 'priority'
+        ]
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
@@ -119,11 +134,13 @@ class TicketUpdateView(UpdateView):
         messages.success(self.request, 'Ticket updated successfully')
         return super().form_valid(form)
 
+
 # Delete Ticket View
 class TicketDeleteView(DeleteView):
     model = Ticket
     success_url = reverse_lazy('tickets')
     template_name = 'tickets/delete_ticket.html'
+
 
 # Delete User Comments
 def delete_comment(request, comment_id):
@@ -133,8 +150,10 @@ def delete_comment(request, comment_id):
         comment.delete()
         messages.success(request, 'Comment deleted successfully.')
     else:
-        messages.error(request, 'You do not have permission to delete this comment.')
+        messages.error(
+            request, 'You do not have permission to delete this comment.')
     return redirect('ticket_detail', slug=ticket_slug)
+
 
 # Ticket Completed Section
 def complete_ticket(request, ticket_slug):

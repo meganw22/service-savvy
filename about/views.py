@@ -6,6 +6,7 @@ from django.contrib import messages
 from .models import About
 
 
+# About Me View
 def about_me(request):
     """
     Renders the About page
@@ -22,6 +23,8 @@ def about_me(request):
         {"about": about},
     )
 
+
+# Edit About View
 class EditAboutView(generic.UpdateView):
     model = About
     template_name = "about/edit_about.html"

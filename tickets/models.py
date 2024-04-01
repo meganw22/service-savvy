@@ -20,6 +20,7 @@ PRIORITY = (
     (2, "Low (1 day +)"),
 )
 
+
 # Ticket Model
 class Ticket(models.Model):
     title = models.CharField(max_length=200, unique=True)
@@ -33,8 +34,10 @@ class Ticket(models.Model):
     priority = models.IntegerField(choices=PRIORITY, default=0)
     is_complete = models.BooleanField(default=False)
     completed_by = models.ForeignKey(
-        User, on_delete=models.SET_NULL, blank=True, null=True, related_name="completed_tickets")
-    completed_at = models.DateTimeField(null=True, blank=True, auto_now_add=True)
+        User, on_delete=models.SET_NULL, blank=True, null=True,
+        related_name="completed_tickets")
+    completed_at = models.DateTimeField(null=True, blank=True,
+                                        auto_now_add=True)
     updated_on = models.DateTimeField(auto_now=True)
 
     class Meta:
@@ -50,6 +53,7 @@ class Ticket(models.Model):
         self.slug = slugify(self.title)
         super(Ticket, self).save(*args, **kwargs)
 
+
 # Comment Model
 class Comment(models.Model):
     ticket = models.ForeignKey(
@@ -61,8 +65,10 @@ class Comment(models.Model):
 
     class Meta:
         ordering = ["created_on"]
+        
     def __str__(self):
         return f"{self.body} by {self.username}"
+
 
 # Archive Model - not utilised
 class Archive(models.Model):
