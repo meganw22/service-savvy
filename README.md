@@ -4,7 +4,7 @@
 
 ## Introduction
 
-Service savvy is a centralised platform for communication between users and maintenance staff. This service enables users to articulate their maintenance needs quickly and accurately to support smoother operations within the workplace. This platform is user friendly, with a simple design and effective tracking and feedback capabilities for both the users and maintenance team. 
+Service Savvy is a centralised platform for communication between users and maintenance staff. This service enables users to articulate their maintenance needs quickly and accurately to support smoother operations within the workplace. This platform is user friendly, with a simple design and effective tracking and feedback capabilities for both the users and maintenance team. 
 
 ## User Stories
 - As a user, I want to be able to create a new maintenance item, providing essential details about the issue.
@@ -62,7 +62,7 @@ Service savvy is a centralised platform for communication between users and main
 ![update ticket drawio](https://github.com/meganw22/service-savvy/assets/141934888/c71b40ff-9ce0-4e60-8e32-9a46bb2857ce)
 
 ## Features
-Service savvy is fully responsive and easy for new users to navigate. It required users to be authenticated when viewing and amending details but the homepage is available for all users to view.
+Service Savvy is fully responsive and easy for new users to navigate. It required users to be authenticated when viewing and amending details but the homepage is available for all users to view.
 
 ### Nav Bar
 The nav bar includes the logo, and nav links for Home, Tickets and User Profile page.
@@ -271,4 +271,4 @@ My project is deployed through Heroku can be found [here](https://project-4-savv
 - Wireframes are from [Draw.io](https://app.diagrams.net/)
 - [fontAwesome](https://fontawesome.com/kits) for icons
 - Code institutes project walkthrough, 'I think Therefore I Blog'.
-- Many pages and videos from Stack Overflow, W3Schools, youTube, chatGPT and other sites
+- Visiting pages and videos from Stack Overflow, W3Schools, YouTube, ChatGPT while troubleshooting and experiencing bugs.
