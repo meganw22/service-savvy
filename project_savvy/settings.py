@@ -27,13 +27,13 @@ STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 # See https://docs.djangoproject.com/en/4.2/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = os.environ.get("SECRET_KEY")
+SECRET_KEY = os.environ.get("SECRET_KEY", "y6#t2%+p-+gg+%3es$4+5rww)dlh9clvje=m%f!9k6&)opu-20")
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True
 
 ALLOWED_HOSTS = [
-    '8000-meganw22-servicesavvy-pe1g239x1xr.ws-eu110.gitpod.io',
+    '8000-meganw22-servicesavvy-k76la5dq5a6.ws.codeinstitute-ide.net',
     '.herokuapp.com'
 ]
 
@@ -102,12 +102,16 @@ DATABASES = {
     'default': dj_database_url.parse(os.environ.get("DATABASE_URL"))
 }
 
+if not DATABASES['default']:
+    DATABASES['default'] = dj_database_url.parse("postgres://iahknfkl:nVo5qy43JPO5XKY0cUzkzRBo-P-UCMn3@flora.db.elephantsql.com/iahknfkl")
+
 if 'test' in sys.argv:
     DATABASES['default']['ENGINE'] = 'django.db.backends.sqlite3'
 
 CSRF_TRUSTED_ORIGINS = [
     "https://*.gitpod.io",
     "https://*.herokuapp.com",
+    "https://8000-meganw22-servicesavvy-k76la5dq5a6.ws.codeinstitute-ide.net",
 ]
 
 AUTH_PASSWORD_VALIDATORS = [

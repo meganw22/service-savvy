@@ -4,9 +4,11 @@ from django.views.generic.edit import UpdateView
 from django.urls import reverse_lazy
 from django.contrib import messages
 from .models import About
-
+from django.contrib.auth.decorators import login_required
+from django.contrib.auth.mixins import LoginRequiredMixin
 
 # About Me View
+@login_required
 def about_me(request):
     """
     Renders the About page
@@ -25,7 +27,8 @@ def about_me(request):
 
 
 # Edit About View
-class EditAboutView(generic.UpdateView):
+class EditAboutView(LoginRequiredMixin, generic.UpdateView):
+    """View to edit the users details"""
     model = About
     template_name = "about/edit_about.html"
     fields = ['full_name', 'job_title', 'email', 'tel']
