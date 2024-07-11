@@ -7,7 +7,7 @@ from .models import About
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin
 
-# About Me View
+
 @login_required
 def about_me(request):
     """
@@ -15,7 +15,6 @@ def about_me(request):
     """
     about, created = About.objects.get_or_create(user=request.user)
     if created:
-        # Set the user field to the currently logged-in user
         about.user = request.user
         about.save()
 
@@ -26,7 +25,6 @@ def about_me(request):
     )
 
 
-# Edit About View
 class EditAboutView(LoginRequiredMixin, generic.UpdateView):
     """View to edit the users details"""
     model = About
