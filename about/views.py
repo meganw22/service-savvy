@@ -10,9 +10,7 @@ from django.contrib.auth.mixins import LoginRequiredMixin
 
 @login_required
 def about_me(request):
-    """
-    Renders the About page
-    """
+    """Renders the About page"""
     about, created = About.objects.get_or_create(user=request.user)
     if created:
         about.user = request.user

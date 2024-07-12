@@ -1,4 +1,4 @@
-from django.shortcuts import get_object_or_404, redirect, reverse, render
+from django.shortcuts import get_object_or_404, redirect
 from django.views.generic import (
     ListView, DetailView, CreateView, UpdateView, DeleteView)
 from .models import Ticket, JOB_CATEGORY, PRIORITY, Comment
@@ -129,7 +129,7 @@ class TicketUpdateView(UpdateView):
         form.instance.username = self.request.user
         if form.instance.is_complete:
             form.instance.completed_by = self.request.user
-            form.instance.completed_at = timezone.now()
+            form.instance.completed_at = now()
 
         messages.success(self.request, 'Ticket updated successfully')
         return super().form_valid(form)
