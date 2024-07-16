@@ -21,8 +21,8 @@ PRIORITY = (
 )
 
 
-# Ticket Model
 class Ticket(models.Model):
+    """Ticket Model"""
     title = models.CharField(max_length=200, unique=True)
     slug = models.SlugField(null=True, unique=True)
     username = models.ForeignKey(
@@ -54,8 +54,8 @@ class Ticket(models.Model):
         super(Ticket, self).save(*args, **kwargs)
 
 
-# Comment Model
 class Comment(models.Model):
+    """Comment Model"""
     ticket = models.ForeignKey(
         Ticket, on_delete=models.CASCADE, related_name="comments")
     username = models.ForeignKey(
@@ -68,8 +68,3 @@ class Comment(models.Model):
         
     def __str__(self):
         return f"{self.body} by {self.username}"
-
-
-# Archive Model - not utilised
-class Archive(models.Model):
-    ticket = models.ForeignKey(Ticket, on_delete=models.CASCADE)

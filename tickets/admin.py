@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import Ticket, Comment, Archive
+from .models import Ticket, Comment
 
 @admin.register(Ticket)
 class TicketAdmin(admin.ModelAdmin):
@@ -11,5 +11,3 @@ class TicketAdmin(admin.ModelAdmin):
 @admin.register(Comment)
 class CommentAdmin(admin.ModelAdmin):
     list_display = ('ticket', 'username', 'body')
-
-admin.site.register(Archive)

@@ -10,22 +10,22 @@ from django.contrib import messages
 from django.utils.timezone import now
 
 
-# Ticket List View
 class TicketListView(LoginRequiredMixin, ListView):
+    """
+    Display a paginated list of all created tickets, Users are able to sort 
+    by various filters and display only their own tickets
+    """
     queryset = Ticket.objects.all()
     template_name = "tickets/tickets.html"
     paginate_by = 6
 
-    # Sort ticket list
     def get_queryset(self):
         queryset = super().get_queryset()
 
-        # Sort User tickets only
         show_own_tickets = self.request.GET.get('own_tickets', False)
         if show_own_tickets:
             queryset = queryset.filter(username=self.request.user)
 
-        # Sort all user tickets
         sort_by = self.request.GET.get('sort_by', 'priority_high')
         if sort_by == 'priority_high':
             queryset = queryset.filter(is_complete=False).order_by(
@@ -56,8 +56,10 @@ class TicketListView(LoginRequiredMixin, ListView):
         return context
 
 
-# Ticket Detail View
 class TicketDetailView(DetailView):
+    """
+    Individual ticket detailed view with option to add comments to ticket.
+    """
     model = Ticket
     template_name = "tickets/ticket_detail.html"
     slug_field = 'slug'
@@ -85,8 +87,8 @@ class TicketDetailView(DetailView):
         return redirect('ticket_detail', slug=ticket.slug)
 
 
-# Create ticket View
 class CreateTicketView(CreateView):
+    """View to create a new ticket"""
     model = Ticket
     template_name = 'tickets/create_ticket.html'
     fields = [
@@ -112,8 +114,8 @@ class CreateTicketView(CreateView):
         return '/tickets/'
 
 
-# Update Ticket View
 class TicketUpdateView(UpdateView):
+    """Update Ticket content view"""
     model = Ticket
     template_name = 'tickets/update_ticket.html'
     fields = [
@@ -136,15 +138,15 @@ class TicketUpdateView(UpdateView):
         return super().form_valid(form)
 
 
-# Delete Ticket View
 class TicketDeleteView(DeleteView):
+    """Delete Ticket View"""
     model = Ticket
     success_url = reverse_lazy('tickets')
     template_name = 'tickets/delete_ticket.html'
 
 
-# Delete User Comments
 def delete_comment(request, comment_id):
+    """Delete User Comment View"""
     comment = get_object_or_404(Comment, id=comment_id)
     ticket_slug = comment.ticket.slug
     if comment.username == request.user:
@@ -158,6 +160,10 @@ def delete_comment(request, comment_id):
 
 @login_required
 def complete_ticket(request, ticket_slug):
+    """
+    If staff authenticated, View to allow completion of tickets, marking
+    ticket as complete and setting a completed timestamp.
+    """
     ticket = get_object_or_404(Ticket, slug=ticket_slug)
 
     if not request.user.is_superuser and not request.user.is_staff:
