@@ -1,16 +1,22 @@
+<!-- Empty field alerts -->
 {% if form.non_field_errors %}
 <div class="alert alert-danger" role="alert">
     {{ form.non_field_errors }}
 </div>
 {% endif %}
+
+<!-- Ticket Title -->
 <div class="mb-2">
     <label for="title" class="form-label">Title</label>
     <input type="text" class="form-control" id="title" name="title" required>
 </div>
+
+<!-- Unique title alert -->
 {% if form.errors.title %}
 <div class="text-danger">{{ form.errors.title }}</div>
 {% endif %}
 
+<!-- Select Job Category -->
 <div class="mb-2">
     <label for="job_category" class="form-label">Job Category</label>
     <select class="form-select" id="job_category" name="job_category" required>
@@ -20,14 +26,20 @@
         {% endfor %}
     </select>
 </div>
+
+<!-- Enter Job Description -->
 <div class="mb-2">
     <label for="job_description" class="form-label">Job Description</label>
     <textarea class="form-control" id="job_description" name="job_description" rows="4" required></textarea>
 </div>
+
+<!-- Enter Location -->
 <div class="mb-2">
     <label for="location" class="form-label">Location</label>
     <input type="text" class="form-control" id="location" name="location" required>
 </div>
+
+<!-- Select Priority -->
 <div class="mb-2">
     <label for="priority" class="form-label">Priority</label>
     <select class="form-select" id="priority" name="priority" required>

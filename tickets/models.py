@@ -20,7 +20,6 @@ PRIORITY = (
     (2, "Low (1 day +)"),
 )
 
-
 class Ticket(models.Model):
     """Ticket Model"""
     title = models.CharField(max_length=200, unique=True)
@@ -36,9 +35,11 @@ class Ticket(models.Model):
     completed_by = models.ForeignKey(
         User, on_delete=models.SET_NULL, blank=True, null=True,
         related_name="completed_tickets")
-    completed_at = models.DateTimeField(null=True, blank=True,
-                                        auto_now_add=True)
+    completed_at = models.DateTimeField(null=True, blank=True)
     updated_on = models.DateTimeField(auto_now=True)
+    updated_by = models.ForeignKey(
+        User, on_delete=models.SET_NULL, null=True, blank=True,
+        related_name="updated_tickets")
 
     class Meta:
         ordering = ["created_on"]
@@ -53,7 +54,7 @@ class Ticket(models.Model):
         self.slug = slugify(self.title)
         super(Ticket, self).save(*args, **kwargs)
 
-
+        
 class Comment(models.Model):
     """Comment Model"""
     ticket = models.ForeignKey(

@@ -167,7 +167,8 @@ def complete_ticket(request, ticket_slug):
     ticket = get_object_or_404(Ticket, slug=ticket_slug)
 
     if not request.user.is_superuser and not request.user.is_staff:
-        messages.error(request, "You do not have permission to complete this ticket.")
+        messages.error(request, 
+        "You do not have permission to complete this ticket.")
         return redirect('ticket_detail', slug=ticket.slug)
 
     if ticket.is_complete:
@@ -180,6 +181,8 @@ def complete_ticket(request, ticket_slug):
         ticket.completed_by = request.user
         ticket.completed_at = now()
         messages.success(request, "Ticket marked as 'Complete'")
+
+    ticket.updated_by = request.user
     ticket.save()
 
     return redirect('ticket_detail', slug=ticket.slug)

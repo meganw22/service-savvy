@@ -55,8 +55,8 @@
             </div>
             {% endif %}
             <div class="row mb-3">
-                <div class="col-md-4 fw-bold">Last Updated On:</div>
-                <div class="col-md-8">{{ ticket.updated_on }}</div>
+                <div class="col-md-4 fw-bold">Last Updated:</div>
+                <div class="col-md-8">By {{ ticket.updated_by }} at {{ ticket.updated_on }}</div>
             </div>
             <div class="mt-3 d-flex justify-content-between flex-wrap">
                 <a href="{% url 'tickets' %}" class="btn btn-secondary m-3">Return to Tickets</a>
