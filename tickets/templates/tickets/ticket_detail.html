@@ -31,14 +31,17 @@
             </div>
             {% if user.is_authenticated %}
             {% if user.is_superuser or user.is_staff %}
-            <form method="post" action="{% url 'complete_ticket' ticket.slug %}">
+            <form id="completeTicketForm" method="post" action="{% url 'complete_ticket' ticket.slug %}">
                 {% csrf_token %}
                 <div class="row mb-3">
                     <div class="col-md-4 fw-bold">Ticket Complete:</div>
                     <div class="col-md-8 mt-2">
                         <input type="checkbox" id="is_complete" name="is_complete"
-                            {% if ticket.is_complete %}checked{% endif %}>
-                        <button type="submit" class="mx-4 btn-sm btn-secondary">Apply</button>
+                            {% if ticket.is_complete %}checked{% endif %}
+                            onchange="toggleApplyButton()">
+                        <button type="submit" id="applyButton" class="mx-4 btn-sm btn-secondary">
+                            {% if ticket.is_complete %}Undo Complete{% else %}Complete Ticket{% endif %}
+                        </button>
                     </div>
                 </div>
             </form>
@@ -124,5 +127,39 @@
         </div>
     </div>
 </div>
+
+<script>
+    function toggleApplyButton() {
+        var checkbox = document.getElementById('is_complete');
+        var button = document.getElementById('applyButton');
+        if (checkbox.checked) {
+            button.style.display = 'inline-block';
+        } else {
+            button.style.display = 'inline-block';
+        }
+    }
+
+    // Set the initial state of the button text on page load
+    document.addEventListener('DOMContentLoaded', function() {
+        var checkbox = document.getElementById('is_complete');
+        var button = document.getElementById('applyButton');
+        if (checkbox.checked) {
+            button.textContent = 'Undo';
+        } else {
+            button.textContent = 'Apply';
+        }
+    });
+
+    // Add event listener to change the button text after form submission
+    document.getElementById('completeTicketForm').addEventListener('submit', function(event) {
+        var checkbox = document.getElementById('is_complete');
+        var button = document.getElementById('applyButton');
+        if (checkbox.checked) {
+            button.textContent = 'Undo';
+        } else {
+            button.textContent = 'Apply';
+        }
+    });
+</script>
 
 {% endblock content %}
