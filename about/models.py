@@ -1,8 +1,8 @@
 from django.db import models
 from django.contrib.auth.models import User
 
-# About Model
 class About(models.Model):
+    """About Model"""
     user = models.OneToOneField(User, on_delete=models.CASCADE, default=None, null=True)
     full_name = models.CharField(max_length=100)
     job_title = models.CharField(max_length=100)
