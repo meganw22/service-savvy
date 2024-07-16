@@ -5,6 +5,7 @@ from .models import Ticket, JOB_CATEGORY, PRIORITY, Comment
 from .forms import CommentForm
 from django.urls import reverse_lazy
 from django.contrib.auth.mixins import LoginRequiredMixin
+from django.contrib.auth.decorators import login_required
 from django.contrib import messages
 from django.utils.timezone import now
 
@@ -155,11 +156,14 @@ def delete_comment(request, comment_id):
     return redirect('ticket_detail', slug=ticket_slug)
 
 
-# Ticket Completed Section
+@login_required
 def complete_ticket(request, ticket_slug):
     ticket = get_object_or_404(Ticket, slug=ticket_slug)
 
-    # Toggle the complete status of the ticket
+    if not request.user.is_superuser and not request.user.is_staff:
+        messages.error(request, "You do not have permission to complete this ticket.")
+        return redirect('ticket_detail', slug=ticket.slug)
+
     if ticket.is_complete:
         ticket.is_complete = False
         ticket.completed_by = None
