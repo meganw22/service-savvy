@@ -27,7 +27,7 @@ class EditAboutView(LoginRequiredMixin, generic.UpdateView):
     """View to edit the users details"""
     model = About
     template_name = "about/edit_about.html"
-    fields = ['full_name', 'job_title', 'email', 'tel']
+    fields = ['full_name', 'job_title', 'tel']
     success_url = reverse_lazy('about')
 
     def form_valid(self, form):
