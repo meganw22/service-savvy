@@ -10,7 +10,6 @@ from django.contrib import messages
 from django.utils.timezone import now
 
 
-@login_required
 class TicketListView(LoginRequiredMixin, ListView):
     """
     Display a paginated list of all created tickets, Users are able to sort 
@@ -57,8 +56,7 @@ class TicketListView(LoginRequiredMixin, ListView):
         return context
 
 
-@login_required
-class TicketDetailView(DetailView):
+class TicketDetailView(LoginRequiredMixin, DetailView):
     """
     Individual ticket detailed view with option to add comments to ticket.
     """
@@ -89,8 +87,7 @@ class TicketDetailView(DetailView):
         return redirect('ticket_detail', slug=ticket.slug)
 
 
-@login_required
-class CreateTicketView(CreateView):
+class CreateTicketView(LoginRequiredMixin, CreateView):
     """View to create a new ticket"""
     model = Ticket
     template_name = 'tickets/create_ticket.html'
@@ -117,8 +114,7 @@ class CreateTicketView(CreateView):
         return '/tickets/'
 
 
-@login_required
-class TicketUpdateView(UpdateView):
+class TicketUpdateView(LoginRequiredMixin, UpdateView):
     """Update Ticket content view"""
     model = Ticket
     template_name = 'tickets/update_ticket.html'
@@ -142,8 +138,7 @@ class TicketUpdateView(UpdateView):
         return super().form_valid(form)
 
 
-@login_required
-class TicketDeleteView(DeleteView):
+class TicketDeleteView(LoginRequiredMixin, DeleteView):
     """Delete Ticket View"""
     model = Ticket
     success_url = reverse_lazy('tickets')
