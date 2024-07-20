@@ -23,6 +23,7 @@ def about_me(request):
     )
 
 
+@login_required
 class EditAboutView(LoginRequiredMixin, generic.UpdateView):
     """View to edit the users details"""
     model = About
