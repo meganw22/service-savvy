@@ -46,10 +46,9 @@ Service Savvy is a centralised platform for communication between users and main
 |                | body: TextField |
 |                | Created_on: DateTimeField |
 
+## User Experience 
 
- 
-
-## Wireframes
+### Wireframes
 
 ![homepage drawio](https://github.com/meganw22/service-savvy/assets/141934888/5b25dc16-9bb7-410c-80c1-6f46753929e7)
 
@@ -60,6 +59,13 @@ Service Savvy is a centralised platform for communication between users and main
 ![create ticket drawio](https://github.com/meganw22/service-savvy/assets/141934888/547e8c76-3d35-48e9-907c-aaeda5a86756)
 
 ![update ticket drawio](https://github.com/meganw22/service-savvy/assets/141934888/c71b40ff-9ce0-4e60-8e32-9a46bb2857ce)
+
+### Font
+Using Google fonts, I selected the font 'Fredoka' to use throughout the website. I found it to be a simple, quirky and very easy to read.
+
+### Colour Scheme
+![image](https://github.com/user-attachments/assets/6ba55ab8-cace-443f-8db1-085d79013535)
+
 
 ## Features
 Service Savvy is fully responsive and easy for new users to navigate. It required users to be authenticated when viewing and amending details but the homepage is available for all users to view.
@@ -248,20 +254,50 @@ No errors found, [CI Python linter](https://pep8ci.herokuapp.com/#) used.
 Situation - Using a 2 step process with a checkbox and an Apply button to complete a ticket when in Ticket Detail View. Currently, Check box is ticked, apply button is pressed. Ticket marked as complete
 Issue - When the checkbox isn't touched, the apply button is pressed and the ticket unchecks and marked as incomplete successfully. This negates the need for dual confirmation is the apply button can perform both tasks.
 Resolved? - No, Incomplete and unknown fix at this time.
+#### Resubmission Update: 
+Although this bug did not affect the overall project result, I aimed to improve this functionality.
+
+Changes Made:
+
+1. I restricted the complete button so that only administrators and staff can close a ticket successfully. Regular users cannot see the complete ticket section.
+2. I added JavaScript to dynamically change the text on the complete button. When the ticket is incomplete, the button reads "Apply" and the checkbox is unchecked. When the Apply button is pressed, the user receives a confirmation notification that the ticket is closed, the checkbox becomes checked, and the button text changes to "Undo". This process repeats, allowing the user to mark the ticket as incomplete with an appropriate notification.
+
 
 ### Update ticket no pre-populated content
 Situation - On pressing the Update ticket button, the view doesn't show the current data in the ticket, making it difficult to edit and causing the user to rewrite the whole ticket.
 Issue - The form is generated from the same form used for Create Ticket, the pre-populated data is never pulled through because it isn’t present to being with. 
 Resolved? - Yes, Create and Update ticket separated, and update ticket pre-populated content is now showing and is editable.
 
-## Deployment
+## Full Deployment to Heroku:
 My project is deployed through Heroku can be found [here](https://project-4-savvy-cfe8d435fa81.herokuapp.com/)
-1. To set up the code to deploy, I used my existing account with Heroku and created a new Heroku App
-2. Set deployment method of GitHub and connected my new App to my GitHub profile.
-3. Within my project code, I created a Procfile in the root directory which specifies the commands executed when the app starts up.
-4. Added Heroku to my list of 'Allowed Hosts' in settings.py
-5. In Heroku, I configured the secret key and database URL to match my project.
-6. Manually deployed my main branch and opened the app through Heroku successfully.  
+To make the locally running website active on a permanent server I needed to take multiple steps to for successful deployment:
+
+- Setting up an app in Heroku to deploy to an interactive public website.
+- Creation of an external database to store data in a structured way that can be easily accessed managed and updated
+- Setting up a hosting service for static and media files compatible with the Heroku server
+
+### Created a database through ElephantSQL:
+1. Navigated to ElephantSQL.com, created a new instance
+2. Selected the ‘Tiny Turtle’ plan, left the tags blank and continued to the next page.
+3. Selected an AWS data centre with a region closest to me: ‘EU-West-1 (Ireland)
+4. After creating the instance, I copied the postgres database URL for later use.
+
+### Created a new Heroku App:
+1. On the Heroku dashboard, I created a new app named ‘project_savvy’.
+2. In the app settings tab, revealed the Config Vars and added the database URL under Config Vars with the key DATABASE_URL.
+
+### Preparation of gitpod environment for deployment
+3. Installed dj_database_url and psycopg2 through the terminal and added them to requirements.txt.
+4. Created a temporary DATABASE_URL in settings.py and created a superuser
+5. Ran commands to make migrations and migrate
+6. After running migrations, I confirmed that the ElephantSQL database was connected by checking auth_user.
+7. I installed gunicorn, created a Procfile, and added Heroku to allowed hosts in settings.py.
+8. Added, committed and pushed these changes to GitHub.
+
+### Connecting to Heroku
+1. Finally, I deployed to Heroku with git push heroku main.
+2. Back in my IDE, I set a new secret key in Heroku Config Vars.
+3. I connected Heroku to GitHub and left automatic deployment disbed.
 
 ## Credits
 - [Bootstrap](https://getbootstrap.com/) for the CSS framework
